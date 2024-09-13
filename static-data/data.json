@@ -1,0 +1,56 @@
+{
+  "customers": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "username": "johndoe",
+      "email": "john@example.com",
+      "password": "hashed_password_1",
+      "addresses": [
+        { "id": 1, "street": "123 Main St", "city": "Metropolis", "zip": "12345" },
+        { "id": 2, "street": "456 Elm St", "city": "Gotham", "zip": "67890" }
+      ],
+      "orders": [
+        { "orderId": 101, "date": "2024-01-15", "total": 59.99 },
+        { "orderId": 102, "date": "2024-02-20", "total": 89.99 }
+      ]
+    }
+  ],
+  "shop": [
+    {
+      "id": 1,
+      "name": "Main Street Shop",
+      "image": "shop_image_url.jpg",
+      "open": true,
+      "currency": "USD",
+      "products": [
+        1,
+        2
+      ]
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "productName": "Widget",
+      "price": 19.99,
+      "available": true,
+      "image": "widget_image_url.jpg",
+      "addOns": [
+        { "name": "Extra Widget", "price": 5.00 }
+      ],
+      "addOnsCannotBeBoughtAlone": true
+    },
+    {
+      "id": 2,
+      "productName": "Gadget",
+      "price": 29.99,
+      "available": false,
+      "image": "gadget_image_url.jpg",
+      "addOns": [
+        { "name": "Gadget Case", "price": 10.00 }
+      ],
+      "addOnsCannotBeBoughtAlone": false
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+.background {
+  background-image: url("../../../assets/background.png");
+  background-size: cover; /* Ensures the image covers the entire area */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  height: 91vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+  margin: 0; /* Removes default margins */
+  padding: 0; /* Removes default padding */
+  overflow: hidden; /* Ensures no scrollbars if the image slightly overflows */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
