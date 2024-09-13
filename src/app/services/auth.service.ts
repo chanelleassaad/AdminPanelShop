@@ -11,13 +11,13 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(username: string, password: string): Observable<any> {
+  login(email: string, password: string): Observable<any> {
     // Fetch users from the server
     return this.http.get<any[]>(`${this.baseUrl}/customers`).pipe(
       map((users) => {
         // Find the user with the matching username and password
         const user = users.find(
-          (u) => u.username === username && u.password === password,
+          (u) => u.email === email && u.password === password,
         );
         return user ? user : null;
       }),

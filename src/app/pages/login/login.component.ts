@@ -18,22 +18,22 @@ export class LoginComponent {
     private router: Router,
   ) {
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      const { username, password } = this.loginForm.value;
-      this.authService.login(username, password).subscribe(
+      const { email, password } = this.loginForm.value;
+      this.authService.login(email, password).subscribe(
         (user) => {
           if (user) {
             // Save user data in local storage
             localStorage.setItem('currentUser', JSON.stringify(user));
             this.router.navigate(['candy-shop/dashboard']);
           } else {
-            this.errorMessage = 'Invalid username or password';
+            this.errorMessage = 'Invalid email or password';
           }
         },
         () => {

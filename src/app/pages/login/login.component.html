@@ -5,19 +5,19 @@
         <mat-card-content>
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <mat-form-field appearance="fill" style="padding-right: 20px">
-              <mat-label>Username</mat-label>
+              <mat-label>Email</mat-label>
               <input
                 matInput
-                formControlName="username"
-                placeholder="johndoe"
+                formControlName="email"
+                placeholder="johndoe@candy.com"
               />
               <mat-error
                 *ngIf="
-                  loginForm.get('username')?.hasError('required') &&
-                  loginForm.get('username')?.touched
+                  loginForm.get('email')?.hasError('required') &&
+                  loginForm.get('email')?.touched
                 "
               >
-                Username is required.
+                Email is required.
               </mat-error>
             </mat-form-field>
 
@@ -42,9 +42,9 @@
               <button mat-raised-button color="primary" type="submit">
                 Sign in
               </button>
-              <div *ngIf="errorMessage">
-                <p style="color: red; padding-left: 10px">{{ errorMessage }}</p>
-              </div>
+              <mat-error *ngIf="errorMessage">
+                {{ errorMessage }}
+              </mat-error>
             </mat-card-actions>
           </form>
         </mat-card-content>

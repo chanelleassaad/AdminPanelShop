@@ -2,25 +2,25 @@
   "customers": [
     {
       "id": 1,
-      "name": "John Doe",
-      "username": "johndoe",
-      "email": "john@example.com",
+      "name": "Alice Sweet",
+      "username": "alicesweet",
+      "email": "alice@example.com",
       "password": "hashed_password_1",
       "addresses": [
-        { "id": 1, "street": "123 Main St", "city": "Metropolis", "zip": "12345" },
-        { "id": 2, "street": "456 Elm St", "city": "Gotham", "zip": "67890" }
+        { "id": 1, "street": "789 Candy Ln", "city": "Sugarville", "zip": "23456" },
+        { "id": 2, "street": "321 Lollipop Rd", "city": "Candyland", "zip": "98765" }
       ],
       "orders": [
-        { "orderId": 101, "date": "2024-01-15", "total": 59.99 },
-        { "orderId": 102, "date": "2024-02-20", "total": 89.99 }
+        { "orderId": 201, "date": "2024-03-10", "total": 15.99 },
+        { "orderId": 202, "date": "2024-04-05", "total": 25.99 }
       ]
     }
   ],
   "shop": [
     {
       "id": 1,
-      "name": "Main Street Shop",
-      "image": "shop_image_url.jpg",
+      "name": "Candy Corner",
+      "image": "candy_corner_image_url.jpg",
       "open": true,
       "currency": "USD",
       "products": [
@@ -32,23 +32,23 @@
   "products": [
     {
       "id": 1,
-      "productName": "Widget",
-      "price": 19.99,
+      "productName": "Chocolate Bar",
+      "price": 2.99,
       "available": true,
-      "image": "widget_image_url.jpg",
+      "image": "chocolate_bar_image_url.jpg",
       "addOns": [
-        { "name": "Extra Widget", "price": 5.00 }
+        { "name": "Extra Nuts", "price": 0.50 }
       ],
       "addOnsCannotBeBoughtAlone": true
     },
     {
       "id": 2,
-      "productName": "Gadget",
-      "price": 29.99,
-      "available": false,
-      "image": "gadget_image_url.jpg",
+      "productName": "Gummy Bears",
+      "price": 3.99,
+      "available": true,
+      "image": "gummy_bears_image_url.jpg",
       "addOns": [
-        { "name": "Gadget Case", "price": 10.00 }
+        { "name": "Sour Coating", "price": 0.75 }
       ],
       "addOnsCannotBeBoughtAlone": false
     }
