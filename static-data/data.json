@@ -11,12 +11,12 @@
         { "id": 2, "street": "321 Lollipop Rd", "city": "Candyland", "zip": "98765" }
       ],
       "orders": [
-        { "orderId": 201, "date": "2024-03-10", "total": 15.99 },
-        { "orderId": 202, "date": "2024-04-05", "total": 25.99 }
+        { "orderId": 201, "date": "2024-03-10", "total": 15.99, "status": "Pending" },
+        { "orderId": 202, "date": "2024-04-05", "total": 25.99, "status": "Delivered" }
       ]
     }
   ],
-  "shop": [
+  "shops": [
     {
       "id": 1,
       "name": "Candy Corner",

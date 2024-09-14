@@ -11,9 +11,33 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ContentTableComponent } from './components/content-table/content-table.component';
+import {
+  MatCell,
+  MatCellDef,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderCellDef,
+  MatHeaderRow,
+  MatHeaderRowDef,
+  MatNoDataRow,
+  MatRow,
+  MatRowDef,
+  MatTable,
+} from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { CustomerModalComponent } from './components/customer-modal/customer-modal.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    DashboardComponent,
+    ContentTableComponent,
+    CustomerModalComponent,
+  ],
   imports: [
     CommonModule,
     BrowserModule,
@@ -23,6 +47,19 @@ import {
     ReactiveFormsModule,
     RouterOutlet,
     NgOptimizedImage,
+    MatTable,
+    MatHeaderCell,
+    MatCell,
+    MatSort,
+    MatPaginator,
+    MatColumnDef,
+    MatHeaderRow,
+    MatRow,
+    MatHeaderCellDef,
+    MatCellDef,
+    MatHeaderRowDef,
+    MatRowDef,
+    MatNoDataRow,
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent],

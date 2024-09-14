@@ -1,1 +1,7 @@
-<p>dashboard works!</p>
+<mat-tab-group style="padding: 20px">
+  <div *ngFor="let label of labels">
+    <mat-tab label="{{ label }}">
+      <app-content-table label="{{ label }}"></app-content-table>
+    </mat-tab>
+  </div>
+</mat-tab-group>
