@@ -5,7 +5,7 @@
       "name": "Alice Sweet",
       "username": "alicesweet",
       "email": "alice@example.com",
-      "password": "hashed_password_1",
+      "password": "Hashedpass123?",
       "addresses": [
         { "id": 1, "street": "789 Candy Ln", "city": "Sugarville", "zip": "23456" },
         { "id": 2, "street": "321 Lollipop Rd", "city": "Candyland", "zip": "98765" }

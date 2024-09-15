@@ -35,6 +35,16 @@ export class DataService {
       .subscribe((data) => this.productsSubject.next(data));
   }
 
+  updateCustomer(updatedCustomer: any): void {
+    const customers = this.customersSubject.getValue();
+    const index = customers.findIndex(
+      (customer) => customer.id === updatedCustomer.id,
+    );
+
+    customers[index] = { ...customers[index], ...updatedCustomer };
+    this.customersSubject.next(customers);
+  }
+
   updateCustomers(customers: any[]): void {
     this.customersSubject.next(customers);
   }

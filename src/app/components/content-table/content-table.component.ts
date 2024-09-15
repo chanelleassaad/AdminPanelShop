@@ -70,8 +70,8 @@ export class ContentTableComponent implements OnInit {
     }
   }
 
-  onEdit(element: any): void {
-    console.log(element);
+  onEdit(customer: any): void {
+    this.dialog.open(CustomerModalComponent, { data: customer });
   }
 
   onDelete(element: any): void {
@@ -79,7 +79,6 @@ export class ContentTableComponent implements OnInit {
   }
 
   addCustomer(): void {
-    console.log('Add Customer');
     this.dialog.open(CustomerModalComponent);
   }
 }
