@@ -21,10 +21,26 @@
         </ng-container>
         <!-- Address Column -->
         <ng-template #addressCol>
-          <ng-container *ngIf="column == 'addresses'; else normalColumn">
+          <ng-container *ngIf="column == 'addresses'; else statusCol">
             <div *ngFor="let address of element.addresses">
               {{ address.street + " ," + address.city + " ," + address.zip }}
             </div>
+          </ng-container>
+        </ng-template>
+        <!-- Status Column -->
+        <ng-template #statusCol>
+          <ng-container *ngIf="column == 'status'; else normalColumn">
+            <select
+              matNativeControl
+              required
+              [(ngModel)]="element.status"
+              style="padding: 5px"
+            >
+              <option value="Pending">Pending</option>
+              <option value="Processing">Processing</option>
+              <option value="Shipped">Shipped</option>
+              <option value="Delivered">Delivered</option>
+            </select>
           </ng-container>
         </ng-template>
         <!-- Normal Column -->
