@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { IShop } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -35,6 +36,7 @@ export class DataService {
       .subscribe((data) => this.productsSubject.next(data));
   }
 
+  // Customers
   updateCustomer(updatedCustomer: any): void {
     const customers = this.customersSubject.getValue();
     const index = customers.findIndex(
@@ -43,12 +45,8 @@ export class DataService {
 
     customers[index] = { ...customers[index], ...updatedCustomer };
     this.customersSubject.next(customers);
+    console.log(this.customersSubject);
   }
-
-  updateCustomers(customers: any[]): void {
-    this.customersSubject.next(customers);
-  }
-
   deleteCustomer(customerId: number): void {
     this.customers$
       .pipe(
@@ -56,9 +54,10 @@ export class DataService {
           customers.filter((customer) => customer.id !== customerId),
         ),
       )
-      .subscribe((updatedCustomers) => this.updateCustomers(updatedCustomers));
+      .subscribe((updatedCustomers) =>
+        this.customersSubject.next(updatedCustomers),
+      );
   }
-
   addCustomer(newCustomer: any): void {
     const currentCustomers = this.customersSubject.getValue();
 
@@ -68,7 +67,7 @@ export class DataService {
         ? Math.max(...currentCustomers.map((customer) => customer.id)) + 1
         : 1; // If no customers, start with id 1
 
-    const customerWithId = { ...newCustomer, id: newId }; // Add the new id to the customer
+    const customerWithId = { id: newId, ...newCustomer }; // Add the new id to the customer
 
     const updatedCustomers = [...currentCustomers, customerWithId]; // Append the new customer with id
     this.customersSubject.next(updatedCustomers); // Update the subject
@@ -77,11 +76,11 @@ export class DataService {
     // this.http.post(`${this.baseUrl}/customers`, customerWithId).subscribe();
   }
 
-  updateShops(shops: any[]): void {
+  // Shops
+  updateShop(shop: IShop): void {
+    const shops = this.shopsSubject.getValue();
+    const index = shops.findIndex((customer) => customer.id === shop.id);
+    shops[index] = { ...shops[index], ...shop };
     this.shopsSubject.next(shops);
-  }
-
-  updateProducts(products: any[]): void {
-    this.productsSubject.next(products);
   }
 }

@@ -1,5 +1,5 @@
 <div class="mat-elevation-z8">
-  <div class="button-container">
+  <div class="button-container" *ngIf="label == 'Customers'">
     <button (click)="addCustomer()">
       <p>Add Customer</p>
       <mat-icon>add</mat-icon>
@@ -43,7 +43,11 @@
           <mat-icon>edit</mat-icon>
         </button>
         <!-- Delete Button -->
-        <button mat-icon-button (click)="onDelete(element)">
+        <button
+          mat-icon-button
+          (click)="onDelete(element)"
+          *ngIf="label == 'Customers'"
+        >
           <mat-icon>delete</mat-icon>
         </button>
       </td>
@@ -53,8 +57,18 @@
     <tr
       style="background-color: mediumpurple; color: white; border-color: white"
       mat-header-row
-      *matHeaderRowDef="displayedColumnsWithActions"
+      *matHeaderRowDef="
+        label == 'Orders' ? displayedColumns : displayedColumnsWithActions
+      "
     ></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumnsWithActions"></tr>
+    <tr
+      mat-row
+      *matRowDef="
+        let row;
+        columns: label == 'Orders'
+          ? displayedColumns
+          : displayedColumnsWithActions
+      "
+    ></tr>
   </table>
 </div>

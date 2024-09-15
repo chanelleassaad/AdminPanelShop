@@ -27,8 +27,31 @@
         1,
         2
       ]
+    },
+    {
+      "id": 2,
+      "name": "The Candy Shop",
+      "image": "candy_corner_image_url.jpg",
+      "open": true,
+      "currency": "USD",
+      "products": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Candy Corner",
+      "image": "candy_corner_image_url.jpg",
+      "open": true,
+      "currency": "USD",
+      "products": [
+        1,
+        2
+      ]
     }
   ],
+
   "products": [
     {
       "id": 1,
@@ -38,8 +61,7 @@
       "image": "chocolate_bar_image_url.jpg",
       "addOns": [
         { "name": "Extra Nuts", "price": 0.50 }
-      ],
-      "addOnsCannotBeBoughtAlone": true
+      ]
     },
     {
       "id": 2,
@@ -49,8 +71,88 @@
       "image": "gummy_bears_image_url.jpg",
       "addOns": [
         { "name": "Sour Coating", "price": 0.75 }
-      ],
-      "addOnsCannotBeBoughtAlone": false
+      ]
+    },
+    {
+      "id": 3,
+      "productName": "Lollipop",
+      "price": 1.49,
+      "available": true,
+      "image": "lollipop_image_url.jpg",
+      "addOns": [
+        { "name": "Glitter Dust", "price": 0.20 }
+      ]
+    },
+    {
+      "id": 4,
+      "productName": "Caramel Toffee",
+      "price": 2.49,
+      "available": true,
+      "image": "caramel_toffee_image_url.jpg",
+      "addOns": [
+        { "name": "Sea Salt", "price": 0.30 }
+      ]
+    },
+    {
+      "id": 5,
+      "productName": "Jelly Beans",
+      "price": 3.29,
+      "available": false,
+      "image": "jelly_beans_image_url.jpg",
+      "addOns": [
+        { "name": "Extra Flavors", "price": 0.40 }
+      ]
+    },
+    {
+      "id": 6,
+      "productName": "Cotton Candy",
+      "price": 1.99,
+      "available": true,
+      "image": "cotton_candy_image_url.jpg",
+      "addOns": [
+        { "name": "Rainbow Sprinkles", "price": 0.25 }
+      ]
+    },
+    {
+      "id": 7,
+      "productName": "Sour Worms",
+      "price": 2.79,
+      "available": true,
+      "image": "sour_worms_image_url.jpg",
+      "addOns": [
+        { "name": "Extra Sour", "price": 0.35 }
+      ]
+    },
+    {
+      "id": 8,
+      "productName": "Fudge Brownie",
+      "price": 3.49,
+      "available": true,
+      "image": "fudge_brownie_image_url.jpg",
+      "addOns": [
+        { "name": "Caramel Drizzle", "price": 0.60 }
+      ]
+    },
+    {
+      "id": 9,
+      "productName": "Hard Candy",
+      "price": 1.99,
+      "available": false,
+      "image": "hard_candy_image_url.jpg",
+      "addOns": [
+        { "name": "Mint Flavor", "price": 0.15 }
+      ]
+    },
+    {
+      "id": 10,
+      "productName": "Marshmallow",
+      "price": 2.19,
+      "available": true,
+      "image": "marshmallow_image_url.jpg",
+      "addOns": [
+        { "name": "Chocolate Dip", "price": 0.50 }
+      ]
     }
   ]
 }
+

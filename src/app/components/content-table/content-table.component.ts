@@ -3,7 +3,8 @@ import { DataService } from '../../services/data.service';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
-import { CustomerModalComponent } from '../customer-modal/customer-modal.component';
+import { CustomerModalComponent } from '../modals/customer-modal/customer-modal.component';
+import { ShopModalComponent } from '../modals/shop-modal/shop-modal.component';
 
 @Component({
   selector: 'app-content-table',
@@ -70,8 +71,27 @@ export class ContentTableComponent implements OnInit {
     }
   }
 
-  onEdit(customer: any): void {
-    this.dialog.open(CustomerModalComponent, { data: customer });
+  // open the edit dialog for Customers or Shops and refresh the data afterwards
+  onEdit(element: any): void {
+    let dialogRef;
+    if (this.label === 'Customers') {
+      dialogRef = this.dialog.open(CustomerModalComponent, { data: element });
+    } else if (this.label === 'Shops') {
+      dialogRef = this.dialog.open(ShopModalComponent, { data: element });
+    }
+
+    dialogRef?.afterClosed().subscribe((updatedData) => {
+      if (updatedData) {
+        // update dataSource with the new changes
+        const index = this.dataSource.findIndex(
+          (item) => item.id === updatedData.id,
+        );
+        if (index !== -1) {
+          this.dataSource[index] = updatedData;
+        }
+        this.dataSource = [...this.dataSource]; // trigger change detection by reassigning
+      }
+    });
   }
 
   onDelete(element: any): void {

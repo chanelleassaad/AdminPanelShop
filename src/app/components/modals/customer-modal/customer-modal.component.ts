@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ContentTableComponent } from '../content-table/content-table.component';
+import { ContentTableComponent } from '../../content-table/content-table.component';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DataService } from '../../services/data.service';
-import { passwordValidator } from '../../../validators/password-validator';
-import { IAddress, IOrder } from '../../../models/interfaces';
+import { DataService } from '../../../services/data.service';
+import { passwordValidator } from '../../../../validators/password-validator';
+import { IAddress, IOrder } from '../../../interfaces';
 
 @Component({
   selector: 'app-customer-modal',
@@ -65,12 +65,13 @@ export class CustomerModalComponent {
 
   onSave() {
     if (this.customerForm.valid) {
-      // FIX: on edit doesn't update data automatically
       if (this.data) {
-        this.dataService.updateCustomer({
+        const updatedCustomer = {
           id: this.data.id,
           ...this.customerForm.value,
-        });
+        };
+        this.dataService.updateCustomer(updatedCustomer);
+        this.dialogRef.close(updatedCustomer); // Pass updated data to parent
       } else {
         this.dataService.addCustomer(this.customerForm.value);
       }

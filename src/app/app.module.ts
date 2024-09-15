@@ -13,28 +13,8 @@ import {
 } from '@angular/common/http';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ContentTableComponent } from './components/content-table/content-table.component';
-import {
-  MatCell,
-  MatCellDef,
-  MatColumnDef,
-  MatHeaderCell,
-  MatHeaderCellDef,
-  MatHeaderRow,
-  MatHeaderRowDef,
-  MatNoDataRow,
-  MatRow,
-  MatRowDef,
-  MatTable,
-} from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
-import { CustomerModalComponent } from './components/customer-modal/customer-modal.component';
-import {
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogTitle,
-} from '@angular/material/dialog';
+import { CustomerModalComponent } from './components/modals/customer-modal/customer-modal.component';
+import { ShopModalComponent } from './components/modals/shop-modal/shop-modal.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +23,7 @@ import {
     DashboardComponent,
     ContentTableComponent,
     CustomerModalComponent,
+    ShopModalComponent,
   ],
   imports: [
     CommonModule,
@@ -53,23 +34,6 @@ import {
     ReactiveFormsModule,
     RouterOutlet,
     NgOptimizedImage,
-    MatTable,
-    MatHeaderCell,
-    MatCell,
-    MatSort,
-    MatPaginator,
-    MatColumnDef,
-    MatHeaderRow,
-    MatRow,
-    MatHeaderCellDef,
-    MatCellDef,
-    MatHeaderRowDef,
-    MatRowDef,
-    MatNoDataRow,
-    MatDialogActions,
-    MatDialogClose,
-    MatDialogContent,
-    MatDialogTitle,
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent],
