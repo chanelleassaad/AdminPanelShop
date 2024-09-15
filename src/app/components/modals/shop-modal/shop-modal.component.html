@@ -1,46 +1,50 @@
-<div style="width: 70vw">
+<div style="width: 60vw">
   <h2 mat-dialog-title>Edit Shop</h2>
 
   <mat-dialog-content>
     <form class="example-form" [formGroup]="shopForm">
-      <table>
-        <tr>
-          <td>
-            <mat-form-field class="example-full-width">
-              <mat-label>Name</mat-label>
-              <input matInput formControlName="name" />
-            </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field>
-              <mat-label>Currency</mat-label>
-              <mat-select formControlName="currency">
-                <mat-option value="USD">USD</mat-option>
-                <mat-option value="EU">EU</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </td>
-          <td>
-            <mat-slide-toggle formControlName="open">Open</mat-slide-toggle>
-          </td>
-        </tr>
-      </table>
+      <div class="form-container">
+        <div class="image-container">
+          <img
+            [src]="shopForm.get('image')?.value"
+            alt="Shop Image"
+            height="200px"
+            width="auto"
+          />
+        </div>
+        <div class="form-fields">
+          <mat-form-field class="example-full-width">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Currency</mat-label>
+            <mat-select formControlName="currency">
+              <mat-option value="USD">USD</mat-option>
+              <mat-option value="EU">EU</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-slide-toggle formControlName="open">Open</mat-slide-toggle>
+        </div>
+      </div>
 
       <!-- Display products with checkboxes -->
       <h3>Products</h3>
-      <div *ngFor="let product of products">
-        <mat-checkbox
-          [checked]="isProductChecked(product.id)"
-          (change)="toggleProduct(product.id, $event.checked)"
-          [disabled]="!product.available"
-        >
-          {{ product.productName }} - {{ product.price | currency }}
-        </mat-checkbox>
+      <div class="checkbox-container">
+        <div *ngFor="let product of products" class="checkbox-item">
+          <mat-checkbox
+            [checked]="isProductChecked(product.id)"
+            (change)="toggleProduct(product.id, $event.checked)"
+            [disabled]="!product.available"
+          >
+            {{ product.productName }} - {{ product.price | currency }}
+          </mat-checkbox>
+        </div>
       </div>
     </form>
   </mat-dialog-content>
 
-  <mat-dialog-actions>
+  <mat-dialog-actions align="end">
     <button mat-button (click)="onNoClick()">Cancel</button>
     <button
       mat-raised-button

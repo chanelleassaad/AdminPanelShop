@@ -7,48 +7,194 @@
       "email": "alice@example.com",
       "password": "Hashedpass123?",
       "addresses": [
-        { "id": 1, "street": "789 Candy Ln", "city": "Sugarville", "zip": "23456" },
-        { "id": 2, "street": "321 Lollipop Rd", "city": "Candyland", "zip": "98765" }
+        {
+          "id": 1,
+          "street": "789 Candy Ln",
+          "city": "Sugarville",
+          "zip": "23456"
+        },
+        {
+          "id": 2,
+          "street": "321 Lollipop Rd",
+          "city": "Candyland",
+          "zip": "98765"
+        }
       ],
       "orders": [
-        { "orderId": 201, "date": "2024-03-10", "total": 15.99, "status": "Pending" },
-        { "orderId": 202, "date": "2024-04-05", "total": 25.99, "status": "Delivered" }
-      ]
-    }
-  ],
-  "shops": [
-    {
-      "id": 1,
-      "name": "Candy Corner",
-      "image": "candy_corner_image_url.jpg",
-      "open": true,
-      "currency": "USD",
-      "products": [
-        1,
-        2
+        {
+          "orderId": 201,
+          "date": "2024-03-10",
+          "total": 15.99,
+          "status": "Pending"
+        },
+        {
+          "orderId": 202,
+          "date": "2024-04-05",
+          "total": 25.99,
+          "status": "Delivered"
+        }
       ]
     },
     {
       "id": 2,
-      "name": "The Candy Shop",
-      "image": "candy_corner_image_url.jpg",
-      "open": true,
-      "currency": "USD",
-      "products": [
-        1,
-        2
+      "name": "Bob Green",
+      "username": "bobgreen",
+      "email": "bob@example.com",
+      "password": "AnotherPass456!",
+      "addresses": [
+        {
+          "id": 3,
+          "street": "456 Oak St",
+          "city": "Greenfield",
+          "zip": "54321"
+        }
+      ],
+      "orders": [
+        {
+          "orderId": 203,
+          "date": "2024-05-15",
+          "total": 30.0,
+          "status": "Shipped"
+        },
+        {
+          "orderId": 204,
+          "date": "2024-06-20",
+          "total": 45.75,
+          "status": "Delivered"
+        }
       ]
     },
     {
       "id": 3,
+      "name": "Charlie Brown",
+      "username": "charliebrown",
+      "email": "charlie@example.com",
+      "password": "SecurePass789@",
+      "addresses": [
+        {
+          "id": 4,
+          "street": "123 Maple Ave",
+          "city": "Forestville",
+          "zip": "67890"
+        },
+        {
+          "id": 5,
+          "street": "987 Pine Blvd",
+          "city": "Woodland",
+          "zip": "12345"
+        }
+      ],
+      "orders": [
+        {
+          "orderId": 205,
+          "date": "2024-07-10",
+          "total": 22.5,
+          "status": "Pending"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Daisy Johnson",
+      "username": "daisyjohnson",
+      "email": "daisy@example.com",
+      "password": "MyPass456*",
+      "addresses": [
+        {
+          "id": 6,
+          "street": "654 Elm St",
+          "city": "Springfield",
+          "zip": "11223"
+        }
+      ],
+      "orders": [
+        {
+          "orderId": 206,
+          "date": "2024-08-01",
+          "total": 12.99,
+          "status": "Delivered"
+        },
+        {
+          "orderId": 207,
+          "date": "2024-08-15",
+          "total": 29.99,
+          "status": "Pending"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Eve Adams",
+      "username": "eveadams",
+      "email": "eve@example.com",
+      "password": "DifferentPass789$",
+      "addresses": [
+        {
+          "id": 7,
+          "street": "321 Cedar Dr",
+          "city": "Lakeside",
+          "zip": "33445"
+        }
+      ],
+      "orders": [
+        {
+          "orderId": 208,
+          "date": "2024-09-10",
+          "total": 50.0,
+          "status": "Shipped"
+        }
+      ]
+    }
+  ],
+
+  "shops": [
+    {
+      "id": 1,
       "name": "Candy Corner",
-      "image": "candy_corner_image_url.jpg",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Colorful_and_Inviting_Candy_Store_%2814867133277%29.jpg",
       "open": true,
       "currency": "USD",
-      "products": [
-        1,
-        2
-      ]
+      "products": [1, 2]
+    },
+    {
+      "id": 2,
+      "name": "The Candy Shop",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/7/7e/A_candy_store_in_Cambridge%2C_Massachusetts.jpg",
+      "open": true,
+      "currency": "USD",
+      "products": [1, 2]
+    },
+    {
+      "id": 3,
+      "name": "Sweet Tooth Candy Store",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Candy_Store_1.jpg",
+      "open": true,
+      "currency": "USD",
+      "products": [1, 2]
+    },
+    {
+      "id": 4,
+      "name": "Sugar Rush",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Storefront.jpg",
+      "open": true,
+      "currency": "USD",
+      "products": [3, 4]
+    },
+    {
+      "id": 5,
+      "name": "Candyland",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/6/62/Candy_Store.jpg",
+      "open": true,
+      "currency": "USD",
+      "products": [3, 4]
+    },
+    {
+      "id": 6,
+      "name": "Sweet Delights",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/5/56/Candy_Store.jpg",
+      "open": true,
+      "currency": "USD",
+      "products": [5, 6]
     }
   ],
 
@@ -59,9 +205,7 @@
       "price": 2.99,
       "available": true,
       "image": "chocolate_bar_image_url.jpg",
-      "addOns": [
-        { "name": "Extra Nuts", "price": 0.50 }
-      ]
+      "addOns": [{ "name": "Extra Nuts", "price": 0.5 }]
     },
     {
       "id": 2,
@@ -69,9 +213,7 @@
       "price": 3.99,
       "available": true,
       "image": "gummy_bears_image_url.jpg",
-      "addOns": [
-        { "name": "Sour Coating", "price": 0.75 }
-      ]
+      "addOns": [{ "name": "Sour Coating", "price": 0.75 }]
     },
     {
       "id": 3,
@@ -79,9 +221,7 @@
       "price": 1.49,
       "available": true,
       "image": "lollipop_image_url.jpg",
-      "addOns": [
-        { "name": "Glitter Dust", "price": 0.20 }
-      ]
+      "addOns": [{ "name": "Glitter Dust", "price": 0.2 }]
     },
     {
       "id": 4,
@@ -89,9 +229,7 @@
       "price": 2.49,
       "available": true,
       "image": "caramel_toffee_image_url.jpg",
-      "addOns": [
-        { "name": "Sea Salt", "price": 0.30 }
-      ]
+      "addOns": [{ "name": "Sea Salt", "price": 0.3 }]
     },
     {
       "id": 5,
@@ -99,9 +237,7 @@
       "price": 3.29,
       "available": false,
       "image": "jelly_beans_image_url.jpg",
-      "addOns": [
-        { "name": "Extra Flavors", "price": 0.40 }
-      ]
+      "addOns": [{ "name": "Extra Flavors", "price": 0.4 }]
     },
     {
       "id": 6,
@@ -109,9 +245,7 @@
       "price": 1.99,
       "available": true,
       "image": "cotton_candy_image_url.jpg",
-      "addOns": [
-        { "name": "Rainbow Sprinkles", "price": 0.25 }
-      ]
+      "addOns": [{ "name": "Rainbow Sprinkles", "price": 0.25 }]
     },
     {
       "id": 7,
@@ -119,9 +253,7 @@
       "price": 2.79,
       "available": true,
       "image": "sour_worms_image_url.jpg",
-      "addOns": [
-        { "name": "Extra Sour", "price": 0.35 }
-      ]
+      "addOns": [{ "name": "Extra Sour", "price": 0.35 }]
     },
     {
       "id": 8,
@@ -129,9 +261,7 @@
       "price": 3.49,
       "available": true,
       "image": "fudge_brownie_image_url.jpg",
-      "addOns": [
-        { "name": "Caramel Drizzle", "price": 0.60 }
-      ]
+      "addOns": [{ "name": "Caramel Drizzle", "price": 0.6 }]
     },
     {
       "id": 9,
@@ -139,9 +269,7 @@
       "price": 1.99,
       "available": false,
       "image": "hard_candy_image_url.jpg",
-      "addOns": [
-        { "name": "Mint Flavor", "price": 0.15 }
-      ]
+      "addOns": [{ "name": "Mint Flavor", "price": 0.15 }]
     },
     {
       "id": 10,
@@ -149,10 +277,7 @@
       "price": 2.19,
       "available": true,
       "image": "marshmallow_image_url.jpg",
-      "addOns": [
-        { "name": "Chocolate Dip", "price": 0.50 }
-      ]
+      "addOns": [{ "name": "Chocolate Dip", "price": 0.5 }]
     }
   ]
 }
-

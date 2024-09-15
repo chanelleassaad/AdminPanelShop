@@ -6,7 +6,12 @@
     </button>
   </div>
 
-  <table mat-table [dataSource]="dataSource" matSort>
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    style="background-color: #f5f5f5"
+  >
     <ng-container
       *ngFor="let column of displayedColumns"
       [matColumnDef]="column"
@@ -23,7 +28,7 @@
         <ng-template #addressCol>
           <ng-container *ngIf="column == 'addresses'; else statusCol">
             <div *ngFor="let address of element.addresses">
-              {{ address.street + " ," + address.city + " ," + address.zip }}
+              {{ address.street + ", " + address.city }}
             </div>
           </ng-container>
         </ng-template>

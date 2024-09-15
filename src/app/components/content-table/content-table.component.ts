@@ -66,7 +66,9 @@ export class ContentTableComponent implements OnInit {
   // table column names
   setDisplayedColumns(): void {
     if (this.dataSource.length > 0) {
-      this.displayedColumns = Object.keys(this.dataSource[0]);
+      this.displayedColumns = Object.keys(this.dataSource[0]).filter(
+        (column) => column !== 'image',
+      );
       this.displayedColumnsWithActions = [...this.displayedColumns, 'actions'];
     }
   }
