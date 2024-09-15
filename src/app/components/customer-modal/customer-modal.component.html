@@ -1,0 +1,93 @@
+<h2 mat-dialog-title>Add customer</h2>
+
+<mat-dialog-content style="width: 56vw">
+  <form class="example-form" [formGroup]="customerForm">
+    <mat-form-field class="example-full-width">
+      <mat-label>Full Name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <table class="example-full-width">
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="username" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" />
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" />
+      <mat-error
+        *ngIf="customerForm.get('password')?.hasError('passwordStrength')"
+      >
+        Password must be at least 8 characters long, contain 1 uppercase, 1
+        lowercase letter, and 1 special character.
+      </mat-error>
+    </mat-form-field>
+
+    <p>Address</p>
+
+    <div formArrayName="addresses">
+      <div
+        *ngFor="let address of addresses.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <table class="example-full-width">
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <mat-label>Street</mat-label>
+                <input matInput formControlName="street" />
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="example-full-width">
+                <mat-label>City</mat-label>
+                <input matInput formControlName="city" />
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="example-full-width">
+                <mat-label>Postal Code</mat-label>
+                <input
+                  matInput
+                  formControlName="zip"
+                  #postalCode
+                  maxlength="5"
+                  placeholder="Ex. 94105"
+                />
+                <mat-hint align="end"
+                  >{{ postalCode.value.length }} / 5</mat-hint
+                >
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <button (click)="addAddress()">Add Another Address</button>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button
+    mat-raised-button
+    color="primary"
+    mat-dialog-close
+    [disabled]="customerForm.invalid"
+    (click)="onSave()"
+  >
+    Save
+  </button>
+</mat-dialog-actions>

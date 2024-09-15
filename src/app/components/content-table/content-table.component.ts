@@ -1,7 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { CustomerModalComponent } from '../customer-modal/customer-modal.component';
 
 @Component({
   selector: 'app-content-table',
@@ -16,6 +18,8 @@ export class ContentTableComponent implements OnInit {
   displayedColumnsWithActions: string[] = [];
 
   data$: Observable<any[]> = of([]);
+
+  readonly dialog = inject(MatDialog);
 
   constructor(private dataService: DataService) {}
 
@@ -76,5 +80,6 @@ export class ContentTableComponent implements OnInit {
 
   addCustomer(): void {
     console.log('Add Customer');
+    this.dialog.open(CustomerModalComponent);
   }
 }

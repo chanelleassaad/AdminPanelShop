@@ -29,6 +29,12 @@ import {
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { CustomerModalComponent } from './components/customer-modal/customer-modal.component';
+import {
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogTitle,
+} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -60,6 +66,10 @@ import { CustomerModalComponent } from './components/customer-modal/customer-mod
     MatHeaderRowDef,
     MatRowDef,
     MatNoDataRow,
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogContent,
+    MatDialogTitle,
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent],

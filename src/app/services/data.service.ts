@@ -50,9 +50,21 @@ export class DataService {
   }
 
   addCustomer(newCustomer: any): void {
-    this.customers$
-      .pipe(map((customers) => [...customers, newCustomer]))
-      .subscribe((updatedCustomers) => this.updateCustomers(updatedCustomers));
+    const currentCustomers = this.customersSubject.getValue();
+
+    // Generate a new id by finding the max id and incrementing it
+    const newId =
+      currentCustomers.length > 0
+        ? Math.max(...currentCustomers.map((customer) => customer.id)) + 1
+        : 1; // If no customers, start with id 1
+
+    const customerWithId = { ...newCustomer, id: newId }; // Add the new id to the customer
+
+    const updatedCustomers = [...currentCustomers, customerWithId]; // Append the new customer with id
+    this.customersSubject.next(updatedCustomers); // Update the subject
+
+    // Save the customer with id to the backend if I had one
+    // this.http.post(`${this.baseUrl}/customers`, customerWithId).subscribe();
   }
 
   updateShops(shops: any[]): void {
