@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -12,15 +12,22 @@ export class LoginComponent {
   loginForm: FormGroup;
   errorMessage: string | null = null;
 
+  hide = signal(true);
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
   ) {
     this.loginForm = this.fb.group({
-      email: ['', Validators.required, Validators.email],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
+  }
+
+  clickEvent(event: MouseEvent) {
+    this.hide.set(!this.hide());
+    event.stopPropagation();
   }
 
   onSubmit(): void {
@@ -31,7 +38,7 @@ export class LoginComponent {
           if (user) {
             // Save user data in local storage
             localStorage.setItem('currentUser', JSON.stringify(user));
-            this.router.navigate(['candy-shop/dashboard']);
+            this.router.navigate(['candy-shop/details-management']);
           } else {
             this.errorMessage = 'Invalid email or password';
           }

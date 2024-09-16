@@ -144,6 +144,29 @@
           "status": "Shipped"
         }
       ]
+    },
+    {
+      "id": 6,
+      "name": "Chanelle Assaad",
+      "username": "chanelleassaad",
+      "email": "chan@gmail.com",
+      "password": "Chanelle123?",
+      "addresses": [
+        {
+          "id": 7,
+          "street": "321 Cedar Dr",
+          "city": "Lakeside",
+          "zip": "33445"
+        }
+      ],
+      "orders": [
+        {
+          "orderId": 208,
+          "date": "2024-09-10",
+          "total": 50.0,
+          "status": "Shipped"
+        }
+      ]
     }
   ],
 

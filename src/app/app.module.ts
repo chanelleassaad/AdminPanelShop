@@ -11,7 +11,7 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { DetailsManagementComponent } from './pages/details-management/details-management.component';
 import { ContentTableComponent } from './components/content-table/content-table.component';
 import { CustomerModalComponent } from './components/modals/customer-modal/customer-modal.component';
 import { ShopModalComponent } from './components/modals/shop-modal/shop-modal.component';
@@ -20,7 +20,7 @@ import { ShopModalComponent } from './components/modals/shop-modal/shop-modal.co
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent,
+    DetailsManagementComponent,
     ContentTableComponent,
     CustomerModalComponent,
     ShopModalComponent,
