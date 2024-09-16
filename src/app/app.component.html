@@ -1,24 +1,39 @@
-<mat-toolbar color="primary" class="header">
-  <img
-    src="/assets/logo.png"
-    height="55"
-    width="60"
-    class="img-padding"
-    alt=""
-  />
-  <span>C's Candy Shop - Admin Panel</span>
-  <span class="spacer"></span>
-  <button
-    mat-icon-button
-    aria-label="Example icon-button with share icon"
-    (click)="signOut()"
+<mat-toolbar class="header">
+  <button mat-icon-button (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <p
+    style="
+      font-family:
+        OFL Sorts Mill Goudy TT,
+        ui-serif;
+    "
   >
+    C's Candy Shop - Admin Panel
+  </p>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="signOut()">
     <mat-icon *ngIf="localStorage.getItem('currentUser')">logout</mat-icon>
   </button>
 </mat-toolbar>
 
-<body class="body">
-  <div class="container-fluid">
+<!-- Side Navigation -->
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer mode="over" opened="false">
+    <mat-nav-list>
+      <mat-list-item
+        *ngFor="let item of menuItems"
+        [ngStyle]="{ 'padding-left': item.indent ? '50px' : '0' }"
+        (click)="navigateTo(item.route, drawer)"
+      >
+        <mat-icon matListIcon>{{ item.icon }}</mat-icon>
+        {{ item.label }}
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Main Content -->
+  <mat-sidenav-content>
     <router-outlet></router-outlet>
-  </div>
-</body>
+  </mat-sidenav-content>
+</mat-sidenav-container>

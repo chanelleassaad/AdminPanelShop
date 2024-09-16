@@ -15,6 +15,14 @@ import { DetailsManagementComponent } from './pages/details-management/details-m
 import { ContentTableComponent } from './components/content-table/content-table.component';
 import { CustomerModalComponent } from './components/modals/customer-modal/customer-modal.component';
 import { ShopModalComponent } from './components/modals/shop-modal/shop-modal.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import {
+  MatDrawer,
+  MatSidenav,
+  MatSidenavContainer,
+  MatSidenavContent,
+} from '@angular/material/sidenav';
+import { MatListItem, MatNavList } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -24,6 +32,7 @@ import { ShopModalComponent } from './components/modals/shop-modal/shop-modal.co
     ContentTableComponent,
     CustomerModalComponent,
     ShopModalComponent,
+    DashboardComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +43,12 @@ import { ShopModalComponent } from './components/modals/shop-modal/shop-modal.co
     ReactiveFormsModule,
     RouterOutlet,
     NgOptimizedImage,
+    MatDrawer,
+    MatSidenavContent,
+    MatSidenavContainer,
+    MatSidenav,
+    MatNavList,
+    MatListItem,
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent],

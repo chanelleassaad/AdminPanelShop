@@ -38,7 +38,7 @@ export class LoginComponent {
           if (user) {
             // Save user data in local storage
             localStorage.setItem('currentUser', JSON.stringify(user));
-            this.router.navigate(['candy-shop/details-management']);
+            this.router.navigate(['candy-shop/dashboard']);
           } else {
             this.errorMessage = 'Invalid email or password';
           }

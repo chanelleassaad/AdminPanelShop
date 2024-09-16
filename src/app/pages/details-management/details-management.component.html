@@ -1,5 +1,8 @@
 <div class="table">
-  <mat-tab-group mat-stretch-tabs="false">
+  <mat-tab-group
+    [selectedIndex]="selected.value"
+    (selectedIndexChange)="selected.setValue($event)"
+  >
     <div *ngFor="let label of labels">
       <mat-tab label="{{ label }}">
         <app-content-table label="{{ label }}"></app-content-table>
