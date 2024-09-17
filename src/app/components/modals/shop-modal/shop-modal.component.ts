@@ -26,7 +26,7 @@ export class ShopModalComponent {
       image: [this.data.image],
       open: [this.data.open],
       currency: [this.data.currency],
-      products: [this.data.products],
+      products: [this.data.products || []],
     });
 
     this.getProducts();
@@ -39,7 +39,8 @@ export class ShopModalComponent {
   }
 
   isProductChecked(productId: number): boolean {
-    return this.shopForm.value.products.includes(productId);
+    const products = this.shopForm.value.products.map((id: any) => String(id));
+    return products.includes(productId);
   }
 
   toggleProduct(productId: number, checked: boolean) {
