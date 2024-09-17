@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ContentTableComponent } from '../../content-table/content-table.component';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -15,6 +15,8 @@ export class CustomerModalComponent {
   dialogRef = inject(MatDialogRef<ContentTableComponent>);
   customerForm: FormGroup;
   readonly data = inject<any>(MAT_DIALOG_DATA);
+
+  hide = signal(true);
 
   constructor(
     private fb: FormBuilder,
@@ -57,6 +59,11 @@ export class CustomerModalComponent {
         ) || [],
       ),
     });
+  }
+
+  clickEvent(event: MouseEvent) {
+    this.hide.set(!this.hide());
+    event.stopPropagation();
   }
 
   onNoClick() {
