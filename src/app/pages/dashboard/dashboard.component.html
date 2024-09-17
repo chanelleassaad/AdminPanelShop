@@ -1,1 +1,35 @@
-<p>dashboard works!</p>
+<div class="dashboard">
+  <h2>Dashboard</h2>
+  <mat-grid-list cols="4" rowHeight="45%" gutterSize="15px">
+    <mat-grid-tile colspan="3">
+      <canvasjs-chart
+        [options]="orderChartOptions"
+        [styles]="{ height: '100%' }"
+        class="chart"
+      ></canvasjs-chart>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+      <canvasjs-chart
+        [options]="productChartOptions"
+        [styles]="{ height: '100%' }"
+        class="chart"
+      ></canvasjs-chart>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+      <div class="customer-summary chart">
+        <h1 class="customer-text">Total Number of Customers</h1>
+        <div class="customer-info">
+          <mat-icon class="customer-icon">people</mat-icon>
+          <span class="customer-count">{{ numberOfCustomers }}</span>
+        </div>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="3">
+      <canvasjs-chart
+        [options]="revenueChartOptions"
+        [styles]="{ height: '100%' }"
+        class="chart"
+      ></canvasjs-chart>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

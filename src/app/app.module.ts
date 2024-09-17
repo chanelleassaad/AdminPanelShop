@@ -23,6 +23,8 @@ import {
   MatSidenavContent,
 } from '@angular/material/sidenav';
 import { MatListItem, MatNavList } from '@angular/material/list';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { MatGridList, MatGridTile } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,9 @@ import { MatListItem, MatNavList } from '@angular/material/list';
     MatSidenav,
     MatNavList,
     MatListItem,
+    CanvasJSAngularChartsModule,
+    MatGridList,
+    MatGridTile,
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent],
