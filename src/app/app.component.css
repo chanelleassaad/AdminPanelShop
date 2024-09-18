@@ -13,11 +13,38 @@
 }
 
 .sidenav-container {
-  margin-top: 56px;
-  height: calc(100vh - 56px);
+  margin-top: 56px; /* Adjust to account for the fixed header height */
+  height: calc(100vh - 56px); /* Full viewport height minus header height */
 }
 
 mat-sidenav {
-  width: 250px;
-  padding-left: 10px;
+  width: 230px;
+  padding: 10px;
+}
+
+mat-sidenav-content {
+  background-color: var(--light-purple);
+}
+
+mat-list-item {
+  cursor: pointer;
+  padding-left: 0;
+}
+
+mat-list-item.indented {
+  padding-left: 50px;
+}
+
+mat-list-item div {
+  display: flex;
+  align-items: center;
+  color: var(--dark-purple);
+}
+
+mat-list-item.indented div {
+  color: rebeccapurple;
+}
+
+mat-icon {
+  padding-right: 5px;
 }
