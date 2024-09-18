@@ -13,6 +13,7 @@ export class DashboardComponent implements OnInit {
   revenueChartOptions: any;
 
   numberOfCustomers = 0;
+  products: any[] = [];
 
   constructor(private dataService: DataService) {}
 
@@ -27,6 +28,7 @@ export class DashboardComponent implements OnInit {
 
     this.dataService.products$.subscribe((products) => {
       this.createProductChart(products);
+      this.products = products;
     });
 
     this.dataService.customers$

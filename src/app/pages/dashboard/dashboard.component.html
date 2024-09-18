@@ -32,4 +32,40 @@
       ></canvasjs-chart>
     </mat-grid-tile>
   </mat-grid-list>
+
+  <!-- Products Section -->
+  <div class="products-section">
+    <h3>All Products</h3>
+    <div class="products-list">
+      <div class="product-card" *ngFor="let product of products">
+        <div style="display: flex; justify-content: center">
+          <img
+            [src]="product.image"
+            alt="{{ product.name }}"
+            class="product-image"
+          />
+        </div>
+
+        <h3 class="product-name">{{ product.productName }}</h3>
+        <div style="display: flex; align-items: center">
+          <p class="product-price">Price: {{ product.price | currency }}</p>
+          <p class="product-availability">
+            {{ product.available ? "Available" : "Out of Stock" }}
+          </p>
+        </div>
+
+        <div
+          class="product-addons"
+          *ngIf="product.addOns && product.addOns.length"
+        >
+          <h5>Add-ons:</h5>
+          <ul>
+            <li *ngFor="let addon of product.addOns">
+              {{ addon.name }} - {{ addon.price | currency }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

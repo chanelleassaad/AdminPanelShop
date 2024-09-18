@@ -227,15 +227,18 @@
       "productName": "Chocolate Bar",
       "price": 2.99,
       "available": true,
-      "image": "chocolate_bar_image_url.jpg",
-      "addOns": [{ "name": "Extra Nuts", "price": 0.5 }]
+      "image": "https://i5.walmartimages.com/seo/Hershey-s-Milk-Chocolate-Giant-Candy-Bar-7-56-oz-25-Pieces_86b65c28-5a70-4ee7-a12d-512374d2f455.3436eec3dc71c02dfb65f39db91605b7.jpeg",
+      "addOns": [
+        { "name": "Extra Nuts", "price": 0.5 },
+        { "name": "Extra Nuts", "price": 0.5 }
+      ]
     },
     {
       "id": 2,
       "productName": "Gummy Bears",
       "price": 3.99,
       "available": true,
-      "image": "gummy_bears_image_url.jpg",
+      "image": "https://i5.walmartimages.com/seo/HARIBO-Goldbears-Original-Gummy-Bears-Pack-of-1-8oz-Peg-Bag_c648f682-7fcb-48f8-849a-7223eeffce76.1f1949265a200f0015dbb65ff71afe57.jpeg",
       "addOns": [{ "name": "Sour Coating", "price": 0.75 }]
     },
     {
@@ -243,7 +246,7 @@
       "productName": "Lollipop",
       "price": 1.49,
       "available": true,
-      "image": "lollipop_image_url.jpg",
+      "image": "https://cdn.mafrservices.com/sys-master-root/h2b/h51/51259922907166/2094_main.jpg?im=Resize=480?im=Resize=(60,60)",
       "addOns": [{ "name": "Glitter Dust", "price": 0.2 }]
     },
     {
@@ -251,7 +254,7 @@
       "productName": "Caramel Toffee",
       "price": 2.49,
       "available": true,
-      "image": "caramel_toffee_image_url.jpg",
+      "image": "https://static.winc.com.au/pi/02/e1f4e74d2c73987409b51f97d5023b29fd5c96-3038463/lgsq.jpg",
       "addOns": [{ "name": "Sea Salt", "price": 0.3 }]
     },
     {
@@ -259,7 +262,7 @@
       "productName": "Jelly Beans",
       "price": 3.29,
       "available": false,
-      "image": "jelly_beans_image_url.jpg",
+      "image": "https://assets.haribo.com/image/upload/s--OzUaGcOi--/ar_1793:2471,c_fill,f_auto,q_60/w_740/v1/consumer-sites/en-gb/40049436-Jelly-Beans-140g.png",
       "addOns": [{ "name": "Extra Flavors", "price": 0.4 }]
     },
     {
@@ -267,7 +270,7 @@
       "productName": "Cotton Candy",
       "price": 1.99,
       "available": true,
-      "image": "cotton_candy_image_url.jpg",
+      "image": "https://candyfunhouse.com/cdn/shop/files/parade-cotton-candy-2oz-candyfunhouse.jpg?v=1699645404",
       "addOns": [{ "name": "Rainbow Sprinkles", "price": 0.25 }]
     },
     {
@@ -275,7 +278,7 @@
       "productName": "Sour Worms",
       "price": 2.79,
       "available": true,
-      "image": "sour_worms_image_url.jpg",
+      "image": "https://assets.haribo.com/image/upload/s--yMn39ggT--/ar_1426:2091,c_fill,f_auto,q_60/w_648/v1/consumer-sites/en-asia/Products/Packshot/50444060_40042952_WormsZourr80g_packshot.png",
       "addOns": [{ "name": "Extra Sour", "price": 0.35 }]
     },
     {
@@ -283,7 +286,7 @@
       "productName": "Fudge Brownie",
       "price": 3.49,
       "available": true,
-      "image": "fudge_brownie_image_url.jpg",
+      "image": "https://sallysbakingaddiction.com/wp-content/uploads/2016/12/homemade-fudge-brownies-3.jpg",
       "addOns": [{ "name": "Caramel Drizzle", "price": 0.6 }]
     },
     {
@@ -291,7 +294,7 @@
       "productName": "Hard Candy",
       "price": 1.99,
       "available": false,
-      "image": "hard_candy_image_url.jpg",
+      "image": "https://i5.walmartimages.com/seo/Jolly-Rancher-2-in-1-Fruit-Flavored-Hard-Candy-Bag-6-5-oz_43f04f3c-e142-4ad7-8f8d-45c13990c6dc.f183d7b8e81f76de240db27faa9af978.jpeg",
       "addOns": [{ "name": "Mint Flavor", "price": 0.15 }]
     },
     {
@@ -299,7 +302,7 @@
       "productName": "Marshmallow",
       "price": 2.19,
       "available": true,
-      "image": "marshmallow_image_url.jpg",
+      "image": "https://worldtradegoods.com/cdn/shop/files/IMG-20230728-WA0024.jpg?v=1701477434",
       "addOns": [{ "name": "Chocolate Dip", "price": 0.5 }]
     }
   ]
