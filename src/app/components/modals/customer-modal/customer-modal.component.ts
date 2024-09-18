@@ -18,6 +18,8 @@ export class CustomerModalComponent {
 
   hide = signal(true);
 
+  errorMessage: string | null = null;
+
   constructor(
     private fb: FormBuilder,
     private dataService: DataService,
@@ -71,16 +73,31 @@ export class CustomerModalComponent {
   }
 
   onSave() {
+    this.errorMessage = null;
     if (this.customerForm.valid) {
-      if (this.data) {
-        const updatedCustomer = {
-          id: this.data.id,
-          ...this.customerForm.value,
-        };
-        this.dataService.updateCustomer(updatedCustomer);
-        this.dialogRef.close(updatedCustomer); // Pass updated data to parent
-      } else {
-        this.dataService.addCustomer(this.customerForm.value);
+      this.dataService.customers$.subscribe((customers) => {
+        customers.forEach((c) => {
+          if (c.email === this.customerForm.value.email) {
+            this.errorMessage = 'Email already in use';
+          }
+          if (c.username === this.customerForm.value.username) {
+            this.errorMessage = 'Username already in use';
+          }
+        });
+      });
+
+      if (!this.errorMessage) {
+        if (this.data) {
+          const updatedCustomer = {
+            id: this.data.id,
+            ...this.customerForm.value,
+          };
+          this.dataService.updateCustomer(updatedCustomer);
+          this.dialogRef.close(updatedCustomer); // Pass updated data to parent
+        } else {
+          this.dataService.addCustomer(this.customerForm.value);
+        }
+        this.dialogRef.close();
       }
     }
   }

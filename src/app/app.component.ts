@@ -42,6 +42,8 @@ export class AppComponent {
     },
   ];
 
+  protected readonly localStorage = localStorage;
+
   constructor(private router: Router) {}
 
   signOut() {
@@ -54,6 +56,4 @@ export class AppComponent {
       drawer.close(); // close the drawer after successful navigation
     });
   }
-
-  protected readonly localStorage = localStorage;
 }

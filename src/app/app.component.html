@@ -1,5 +1,9 @@
 <mat-toolbar class="header">
-  <button mat-icon-button (click)="drawer.toggle()">
+  <button
+    mat-icon-button
+    *ngIf="localStorage.getItem('currentUser')"
+    (click)="drawer.toggle()"
+  >
     <mat-icon>menu</mat-icon>
   </button>
   <p
@@ -12,8 +16,12 @@
     C's Candy Shop - Admin Panel
   </p>
   <span class="spacer"></span>
-  <button mat-icon-button (click)="signOut()">
-    <mat-icon *ngIf="localStorage.getItem('currentUser')">logout</mat-icon>
+  <button
+    mat-icon-button
+    *ngIf="localStorage.getItem('currentUser')"
+    (click)="signOut()"
+  >
+    <mat-icon>logout</mat-icon>
   </button>
 </mat-toolbar>
 
