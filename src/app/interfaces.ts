@@ -23,6 +23,7 @@ export interface ICustomer {
 }
 
 export interface IAddOn {
+  id: number;
   name: string;
   price: number;
 }
@@ -34,7 +35,6 @@ export interface IProduct {
   available: boolean;
   image: string;
   addOns: IAddOn[];
-  addOnsCannotBeBoughtAlone: boolean;
 }
 
 export interface IShop {
@@ -44,10 +44,4 @@ export interface IShop {
   open: boolean;
   currency: string;
   products: number[];
-}
-
-export interface IData {
-  customers: ICustomer[];
-  shops: IShop[];
-  products: IProduct[];
 }

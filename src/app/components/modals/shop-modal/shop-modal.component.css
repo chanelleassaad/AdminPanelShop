@@ -7,6 +7,8 @@
 .checkbox-item {
   flex: 1 1 calc(50% - 16px);
   box-sizing: border-box;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
 }
 
 .form-container {
@@ -24,4 +26,13 @@
   display: flex;
   flex-direction: column;
   gap: 10px; /* Space between form fields */
+}
+
+.addOn h6 {
+  margin: 0;
+  padding-left: 10px;
+}
+
+.addOn div {
+  padding-left: 20px;
 }

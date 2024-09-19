@@ -39,6 +39,20 @@
           >
             {{ product.productName }} - {{ product.price | currency }}
           </mat-checkbox>
+
+          <!-- Add-ons Section -->
+          <div class="addOn" *ngIf="product.addOns.length">
+            <h6>Add-Ons</h6>
+            <div *ngFor="let addOn of product.addOns">
+              <mat-checkbox
+                [checked]="isAddOnChecked(product.id, addOn.id)"
+                [disabled]="!product.available || !isProductChecked(product.id)"
+                (change)="toggleAddOn(product.id, addOn.id, $event.checked)"
+              >
+                {{ addOn.name }} (+{{ addOn.price | currency }})
+              </mat-checkbox>
+            </div>
+          </div>
         </div>
       </div>
     </form>

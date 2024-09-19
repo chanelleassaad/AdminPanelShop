@@ -1,6 +1,6 @@
-# Azsft
+# Azsft - Candy Shop Admin Panel
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.4.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.4. It is a Candy Shop Admin Panel that allows administrators to manage shops, orders, and user accounts.
 
 ## Development server
 
@@ -17,6 +17,13 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Backend
+
+To start the backend server (assuming you have a separate backend service for managing data), use:
+```bash
+ npm run "start backend"
+```
 
 ## Running end-to-end tests
 

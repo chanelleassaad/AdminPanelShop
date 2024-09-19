@@ -13,12 +13,18 @@
     >
       <th mat-header-cell *matHeaderCellDef>{{ column | titlecase }}</th>
       <td mat-cell *matCellDef="let element">
-        <!-- Orders Column -->
-        <ng-container *ngIf="column == 'orders'; else addressCol">
-          <div *ngFor="let order of element.orders">
-            {{ order.orderId }}
-          </div>
+        <!-- Products Column -->
+        <ng-container *ngIf="column == 'products'; else ordersCol">
+          {{ element.products ? element.products.length : 0 }}
         </ng-container>
+        <!-- Orders Column -->
+        <ng-template #ordersCol>
+          <ng-container *ngIf="column == 'orders'; else addressCol">
+            <div *ngFor="let order of element.orders">
+              {{ order.orderId }}
+            </div>
+          </ng-container>
+        </ng-template>
         <!-- Address Column -->
         <ng-template #addressCol>
           <ng-container *ngIf="column == 'addresses'; else statusCol">
