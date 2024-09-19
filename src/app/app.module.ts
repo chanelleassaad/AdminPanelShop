@@ -25,6 +25,8 @@ import {
 import { MatListItem, MatNavList } from '@angular/material/list';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { MatGridList, MatGridTile } from '@angular/material/grid-list';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,8 @@ import { MatGridList, MatGridTile } from '@angular/material/grid-list';
     CanvasJSAngularChartsModule,
     MatGridList,
     MatGridTile,
+    MatTableModule,
+    MatPaginatorModule,
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent],

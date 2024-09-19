@@ -1,4 +1,4 @@
-<div class="mat-elevation-z8" style="padding-bottom: 20px">
+<div class="mat-elevation-z8">
   <div class="button-container" *ngIf="label == 'Customers'">
     <button (click)="addCustomer()">
       <p>Add Customer</p>
@@ -93,4 +93,14 @@
       "
     ></tr>
   </table>
+</div>
+
+<!-- Paginator -->
+<div style="margin-bottom: 10px; border: 1px solid #2d0a75">
+  <mat-paginator
+    [length]="dataSource.data.length"
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 25]"
+    aria-label="Select page"
+  ></mat-paginator>
 </div>

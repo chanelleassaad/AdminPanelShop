@@ -1,10 +1,12 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomerModalComponent } from '../modals/customer-modal/customer-modal.component';
 import { ShopModalComponent } from '../modals/shop-modal/shop-modal.component';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-content-table',
@@ -14,13 +16,16 @@ import { ShopModalComponent } from '../modals/shop-modal/shop-modal.component';
 export class ContentTableComponent implements OnInit {
   @Input() label = ''; // 'Customers', 'Shops', 'Orders'
 
-  dataSource: any[] = [];
+  // Use MatTableDataSource instead of a plain array for data source
+  dataSource = new MatTableDataSource<any>([]);
   displayedColumns: string[] = [];
   displayedColumnsWithActions: string[] = [];
 
   data$: Observable<any[]> = of([]);
 
   readonly dialog = inject(MatDialog);
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private dataService: DataService) {}
 
@@ -34,7 +39,7 @@ export class ContentTableComponent implements OnInit {
       case 'Customers':
         this.data$ = this.dataService.customers$;
         this.data$.subscribe((data) => {
-          this.dataSource = data;
+          this.dataSource.data = data;
           this.setDisplayedColumns();
         });
         break;
@@ -42,7 +47,7 @@ export class ContentTableComponent implements OnInit {
       case 'Shops':
         this.data$ = this.dataService.shops$;
         this.data$.subscribe((data) => {
-          this.dataSource = data;
+          this.dataSource.data = data;
           this.setDisplayedColumns();
         });
         break;
@@ -52,7 +57,7 @@ export class ContentTableComponent implements OnInit {
           map((customers) => customers.flatMap((customer) => customer.orders)),
         );
         this.data$.subscribe((orders) => {
-          this.dataSource = orders;
+          this.dataSource.data = orders;
           this.setDisplayedColumns();
         });
         break;
@@ -65,12 +70,15 @@ export class ContentTableComponent implements OnInit {
 
   // table column names
   setDisplayedColumns(): void {
-    if (this.dataSource.length > 0) {
-      this.displayedColumns = Object.keys(this.dataSource[0]).filter(
+    if (this.dataSource.data.length > 0) {
+      this.displayedColumns = Object.keys(this.dataSource.data[0]).filter(
         (column) => column !== 'image' && column !== 'password',
       );
       this.displayedColumnsWithActions = [...this.displayedColumns, 'actions'];
     }
+
+    // Connect the paginator to the dataSource
+    this.dataSource.paginator = this.paginator;
   }
 
   // open the edit dialog for Customers or Shops and refresh the data afterwards
@@ -85,13 +93,13 @@ export class ContentTableComponent implements OnInit {
     dialogRef?.afterClosed().subscribe((updatedData) => {
       if (updatedData) {
         // update dataSource with the new changes
-        const index = this.dataSource.findIndex(
+        const index = this.dataSource.data.findIndex(
           (item) => item.id === updatedData.id,
         );
         if (index !== -1) {
-          this.dataSource[index] = updatedData;
+          this.dataSource.data[index] = updatedData;
         }
-        this.dataSource = [...this.dataSource]; // trigger change detection by reassigning
+        this.dataSource.data = [...this.dataSource.data]; // trigger change detection by reassigning
       }
     });
   }
