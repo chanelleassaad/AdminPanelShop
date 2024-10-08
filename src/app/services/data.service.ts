@@ -67,7 +67,7 @@ export class DataService {
         ? Math.max(...currentCustomers.map((customer) => customer.id)) + 1
         : 1; // If no customers, start with id 1
 
-    const customerWithId = { id: newId, ...newCustomer }; // Add the new id to the customer
+    const customerWithId = { newId, ...newCustomer }; // Add the new id to the customer
 
     const updatedCustomers = [...currentCustomers, customerWithId]; // Append the new customer with id
     this.customersSubject.next(updatedCustomers); // Update the subject

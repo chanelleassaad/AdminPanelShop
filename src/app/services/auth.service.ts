@@ -12,7 +12,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(email: string, password: string): Observable<ILoginCredentials> {
+  login(email: string, password: string): Observable<ILoginCredentials | null> {
     // Fetch users from the server
     return this.http.get<ILoginCredentials[]>(`${this.baseUrl}/customers`).pipe(
       map((users) => {

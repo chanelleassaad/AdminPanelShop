@@ -5,6 +5,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../../../services/data.service';
 import { passwordValidator } from '../../../../validators/password-validator';
 import { IAddress, IOrder } from '../../../interfaces';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-customer-modal',
@@ -73,33 +74,47 @@ export class CustomerModalComponent {
   }
 
   onSave() {
-    this.errorMessage = null;
-    if (this.customerForm.valid) {
-      this.dataService.customers$.subscribe((customers) => {
-        customers.forEach((c) => {
-          if (c.email === this.customerForm.value.email) {
-            this.errorMessage = 'Email already in use';
-          }
-          if (c.username === this.customerForm.value.username) {
-            this.errorMessage = 'Username already in use';
-          }
-        });
-      });
+    let compareId = null;
+    if (this.data) {
+      compareId = this.data.id;
+    }
 
-      if (!this.errorMessage) {
-        if (this.data) {
-          const updatedCustomer = {
-            id: this.data.id,
-            ...this.customerForm.value,
-          };
-          this.dataService.updateCustomer(updatedCustomer);
-          this.dialogRef.close(updatedCustomer); // Pass updated data to parent
+    this.errorMessage = null;
+
+    // Early return if the form is invalid
+    if (!this.customerForm.valid) {
+      return;
+    }
+
+    this.dataService.customers$.pipe(take(1)).subscribe((customers) => {
+      //Make sure that it isn't comparing with itself
+      const emailExists = customers.some(
+        (c) => c.id !== compareId && c.email === this.customerForm.value.email,
+      );
+      const usernameExists = customers.some(
+        (c) =>
+          c.id !== compareId && c.username === this.customerForm.value.username,
+      );
+
+      if (emailExists) {
+        this.errorMessage = 'Email already in use';
+      } else if (usernameExists) {
+        this.errorMessage = 'Username already in use';
+      } else {
+        const customerData = {
+          id: compareId || undefined,
+          ...this.customerForm.value,
+        };
+
+        if (compareId) {
+          this.dataService.updateCustomer(customerData);
         } else {
-          this.dataService.addCustomer(this.customerForm.value);
+          this.dataService.addCustomer(customerData);
         }
+
         this.dialogRef.close();
       }
-    }
+    });
   }
 
   get orders() {
