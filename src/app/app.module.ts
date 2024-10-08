@@ -1,21 +1,19 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { MaterialModule } from './material.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
-import { LoginComponent } from './pages/login/login.component';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { DetailsManagementComponent } from './pages/details-management/details-management.component';
-import { ContentTableComponent } from './components/content-table/content-table.component';
-import { CustomerModalComponent } from './components/modals/customer-modal/customer-modal.component';
-import { ShopModalComponent } from './components/modals/shop-modal/shop-modal.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { DashboardModule } from './pages/dashboard/dashboard.module';
+import { DetailsManagementModule } from './pages/details-management/details-management.module';
+import { LoginModule } from './pages/login/login.module';
+import { MatToolbar } from '@angular/material/toolbar';
+import { MatIcon } from '@angular/material/icon';
+import { MatIconButton } from '@angular/material/button';
 import {
   MatDrawer,
   MatSidenav,
@@ -23,41 +21,28 @@ import {
   MatSidenavContent,
 } from '@angular/material/sidenav';
 import { MatListItem, MatNavList } from '@angular/material/list';
-import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
-import { MatGridList, MatGridTile } from '@angular/material/grid-list';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    DetailsManagementComponent,
-    ContentTableComponent,
-    CustomerModalComponent,
-    ShopModalComponent,
-    DashboardComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     CommonModule,
     BrowserModule,
     AppRoutingModule,
-    MaterialModule,
-    FormsModule,
-    ReactiveFormsModule,
     RouterOutlet,
-    NgOptimizedImage,
+    DashboardModule,
+    LoginModule,
+    DetailsManagementModule,
     MatDrawer,
     MatSidenavContent,
     MatSidenavContainer,
     MatSidenav,
     MatNavList,
     MatListItem,
-    CanvasJSAngularChartsModule,
-    MatGridList,
-    MatGridTile,
-    MatTableModule,
-    MatPaginatorModule,
+    MatToolbar,
+    MatIcon,
+    MatIconButton,
+    BrowserAnimationsModule,
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent],
