@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IShop } from '../interfaces';
+import { ICustomer, IProduct, IShop } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -11,9 +11,9 @@ export class DataService {
   private baseUrl = 'http://localhost:3000';
 
   // rxjs storage for instant updates
-  private customersSubject = new BehaviorSubject<any[]>([]);
-  private shopsSubject = new BehaviorSubject<any[]>([]);
-  private productsSubject = new BehaviorSubject<any[]>([]);
+  private customersSubject = new BehaviorSubject<ICustomer[]>([]);
+  private shopsSubject = new BehaviorSubject<IShop[]>([]);
+  private productsSubject = new BehaviorSubject<IProduct[]>([]);
 
   customers$ = this.customersSubject.asObservable();
   shops$ = this.shopsSubject.asObservable();
@@ -26,18 +26,18 @@ export class DataService {
   // fetch data from json
   private loadInitialData(): void {
     this.http
-      .get<any[]>(`${this.baseUrl}/customers`)
+      .get<ICustomer[]>(`${this.baseUrl}/customers`)
       .subscribe((data) => this.customersSubject.next(data));
     this.http
-      .get<any[]>(`${this.baseUrl}/shops`)
+      .get<IShop[]>(`${this.baseUrl}/shops`)
       .subscribe((data) => this.shopsSubject.next(data));
     this.http
-      .get<any[]>(`${this.baseUrl}/products`)
+      .get<IProduct[]>(`${this.baseUrl}/products`)
       .subscribe((data) => this.productsSubject.next(data));
   }
 
   // Customers
-  updateCustomer(updatedCustomer: any): void {
+  updateCustomer(updatedCustomer: ICustomer): void {
     const customers = this.customersSubject.getValue();
     const index = customers.findIndex(
       (customer) => customer.id === updatedCustomer.id,
@@ -58,7 +58,7 @@ export class DataService {
         this.customersSubject.next(updatedCustomers),
       );
   }
-  addCustomer(newCustomer: any): void {
+  addCustomer(newCustomer: ICustomer): void {
     const currentCustomers = this.customersSubject.getValue();
 
     // Generate a new id by finding the max id and incrementing it

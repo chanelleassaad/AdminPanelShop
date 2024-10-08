@@ -45,3 +45,8 @@ export interface IShop {
   currency: string;
   products: number[];
 }
+
+export interface ILoginCredentials {
+  email: string;
+  password: string;
+}
