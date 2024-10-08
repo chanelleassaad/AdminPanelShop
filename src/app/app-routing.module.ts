@@ -4,10 +4,11 @@ import { LoginComponent } from './pages/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { DetailsManagementComponent } from './pages/details-management/details-management.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { UnauthGuard } from './guards/unauth.guard';
 
 const routes: Routes = [
   {
-    path: 'candy-shop',
+    path: '',
     redirectTo: 'candy-shop/login',
     pathMatch: 'full',
   },
@@ -17,6 +18,7 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent,
+        canActivate: [UnauthGuard],
       },
       {
         path: 'dashboard',
