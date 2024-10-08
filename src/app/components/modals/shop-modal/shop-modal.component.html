@@ -1,10 +1,10 @@
-<div style="width: 60vw">
+<div class="w-[60vw]">
   <h2 mat-dialog-title>Edit Shop</h2>
 
   <mat-dialog-content>
-    <form class="example-form" [formGroup]="shopForm">
-      <div class="form-container">
-        <div class="image-container">
+    <form [formGroup]="shopForm">
+      <div class="flex items-start gap-2.5">
+        <div class="flex-1">
           <img
             [src]="shopForm.get('image')?.value"
             alt="Shop Image"
@@ -12,7 +12,7 @@
             width="auto"
           />
         </div>
-        <div class="form-fields">
+        <div class="flex-2 flex flex-col gap-2.5 w-[60%]">
           <mat-form-field class="example-full-width">
             <mat-label>Name</mat-label>
             <input matInput formControlName="name" />
@@ -29,9 +29,12 @@
       </div>
 
       <!-- Display products with checkboxes -->
-      <h3>Products</h3>
-      <div class="checkbox-container">
-        <div *ngFor="let product of products" class="checkbox-item">
+      <h3 class="pt-5">Products</h3>
+      <div class="flex flex-wrap gap-[16px]">
+        <div
+          *ngFor="let product of products"
+          class="flex-1 min-w-[calc(50%-16px)] box-border border-b border-gray-300"
+        >
           <mat-checkbox
             [checked]="isProductChecked(product.id)"
             (change)="toggleProduct(product.id, $event.checked)"
@@ -39,11 +42,10 @@
           >
             {{ product.productName }} - {{ product.price | currency }}
           </mat-checkbox>
-
           <!-- Add-ons Section -->
-          <div class="addOn" *ngIf="product.addOns.length">
-            <h6>Add-Ons</h6>
-            <div *ngFor="let addOn of product.addOns">
+          <div *ngIf="product.addOns.length">
+            <h6 class="m-0 pl-2.5 text-xs">Add-Ons</h6>
+            <div *ngFor="let addOn of product.addOns" class="pl-5">
               <mat-checkbox
                 [checked]="isAddOnChecked(product.id, addOn.id)"
                 [disabled]="!product.available || !isProductChecked(product.id)"

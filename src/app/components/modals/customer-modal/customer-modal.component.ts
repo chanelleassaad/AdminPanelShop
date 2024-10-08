@@ -10,7 +10,6 @@ import { take } from 'rxjs';
 @Component({
   selector: 'app-customer-modal',
   templateUrl: './customer-modal.component.html',
-  styleUrl: './customer-modal.component.css',
 })
 export class CustomerModalComponent {
   dialogRef = inject(MatDialogRef<ContentTableComponent>);

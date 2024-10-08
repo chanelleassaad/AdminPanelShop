@@ -1,18 +1,23 @@
 <div class="mat-elevation-z8">
-  <div class="button-container" *ngIf="label == 'Customers'">
-    <button (click)="addCustomer()">
+  <div class="flex justify-end p-1" *ngIf="label == 'Customers'">
+    <button
+      (click)="addCustomer()"
+      class="p-2 flex items-center justify-center bg-medium-purple text-white border border-medium-purple rounded-lg cursor-pointer transition-colors duration-300 ease-in-out active:bg-white active:text-medium-purple active:border-medium-purple"
+    >
       <p>Add Customer</p>
       <mat-icon>add</mat-icon>
     </button>
   </div>
 
-  <table mat-table [dataSource]="dataSource" matSort>
+  <table mat-table [dataSource]="dataSource" matSort class="w-full">
     <ng-container
       *ngFor="let column of displayedColumns"
       [matColumnDef]="column"
     >
-      <th mat-header-cell *matHeaderCellDef>{{ column | titlecase }}</th>
-      <td mat-cell *matCellDef="let element">
+      <th mat-header-cell *matHeaderCellDef class="w-2.5">
+        {{ column | titlecase }}
+      </th>
+      <td mat-cell *matCellDef="let element" class="w-2.5">
         <!-- Products Column -->
         <ng-container *ngIf="column == 'products'; else ordersCol">
           {{ element.products ? element.products.length : 0 }}
@@ -40,7 +45,7 @@
               matNativeControl
               required
               [(ngModel)]="element.status"
-              style="padding: 5px"
+              class="p-1"
             >
               <option value="Pending">Pending</option>
               <option value="Processing">Processing</option>
@@ -58,8 +63,8 @@
 
     <!-- Action Column -->
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let element">
+      <th mat-header-cell *matHeaderCellDef class="w-2.5"></th>
+      <td mat-cell *matCellDef="let element" class="w-2.5">
         <!-- Edit Button -->
         <button mat-icon-button (click)="onEdit(element)">
           <mat-icon>edit</mat-icon>
@@ -77,8 +82,8 @@
 
     <!-- Header and row definitions -->
     <tr
-      style="background-color: mediumpurple; color: white; border-color: white"
       mat-header-row
+      class="!w-2.5 !bg-medium-purple !text-white !border !border-white"
       *matHeaderRowDef="
         label == 'Orders' ? displayedColumns : displayedColumnsWithActions
       "
@@ -91,12 +96,13 @@
           ? displayedColumns
           : displayedColumnsWithActions
       "
+      class="w-2.5"
     ></tr>
   </table>
 </div>
 
 <!-- Paginator -->
-<div style="margin-bottom: 10px; border: 1px solid #2d0a75">
+<div class="mb-2.5 border border-[#2d0a75]">
   <mat-paginator
     [length]="dataSource.data.length"
     [pageSize]="5"

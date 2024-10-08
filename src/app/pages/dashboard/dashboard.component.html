@@ -1,26 +1,30 @@
-<div class="dashboard">
+<div class="pt-2.5 p-5 h-[95.3%]">
   <h2>Dashboard</h2>
   <mat-grid-list cols="4" rowHeight="45%" gutterSize="15px">
     <mat-grid-tile colspan="3">
       <canvasjs-chart
         [options]="orderChartOptions"
         [styles]="{ height: '100%' }"
-        class="chart"
+        class="w-full h-full"
       ></canvasjs-chart>
     </mat-grid-tile>
     <mat-grid-tile colspan="1">
       <canvasjs-chart
         [options]="productChartOptions"
         [styles]="{ height: '100%' }"
-        class="chart"
+        class="w-full h-full"
       ></canvasjs-chart>
     </mat-grid-tile>
     <mat-grid-tile colspan="1">
-      <div class="customer-summary chart">
-        <h1 class="customer-text">Total Number of Customers</h1>
-        <div class="customer-info">
-          <mat-icon class="customer-icon">people</mat-icon>
-          <span class="customer-count">{{ numberOfCustomers }}</span>
+      <div class="flex flex-col w-full h-full bg-white">
+        <h1 class="text-[17px] font-bold text-dark-purple self-center p-2">
+          Total Number of Customers
+        </h1>
+        <div
+          class="!flex !items-center !justify-center bg-medium-purple text-white !w-[200px] !h-[200px] rounded-full !mx-auto shadow-md"
+        >
+          <mat-icon class="text-7xl !h-[40%] !w-[45%]">people</mat-icon>
+          <span class="text-6xl font-bold">{{ numberOfCustomers }}</span>
         </div>
       </div>
     </mat-grid-tile>
@@ -28,28 +32,33 @@
       <canvasjs-chart
         [options]="revenueChartOptions"
         [styles]="{ height: '100%' }"
-        class="chart"
+        class="w-full h-full"
       ></canvasjs-chart>
     </mat-grid-tile>
   </mat-grid-list>
 
   <!-- Products Section -->
-  <div class="products-section">
+  <div class="mt-5 pb-5 w-full">
     <h3>All Products</h3>
-    <div class="products-list">
-      <div class="product-card" *ngFor="let product of products">
-        <div style="display: flex; justify-content: center">
+    <div class="flex flex-wrap gap-7">
+      <div
+        class="border border-gray-300 rounded-lg p-2 w-[14.55%] shadow-md bg-white"
+        *ngFor="let product of products"
+      >
+        <div class="flex justify-center">
           <img
             [src]="product.image"
             alt="{{ product.name }}"
-            class="product-image"
+            class="w-auto h-[100px] object-cover rounded-md"
           />
         </div>
 
-        <h3 class="product-name">{{ product.productName }}</h3>
-        <div style="display: flex; align-items: center">
-          <p class="product-price">Price: {{ product.price | currency }}</p>
-          <p class="product-availability">
+        <h3 class="text-base my-1">{{ product.productName }}</h3>
+        <div class="flex items-center">
+          <p class="text-sm text-gray-800 pr-2">
+            Price: {{ product.price | currency }}
+          </p>
+          <p class="text-sm text-gray-600">
             {{ product.available ? "Available" : "Out of Stock" }}
           </p>
         </div>
@@ -58,9 +67,9 @@
           class="product-addons"
           *ngIf="product.addOns && product.addOns.length"
         >
-          <h5>Add-ons:</h5>
-          <ul>
-            <li *ngFor="let addon of product.addOns">
+          <h5 class="p-0 m-0">Add-ons:</h5>
+          <ul class="list-none p-0">
+            <li class="text-xs my-1" *ngFor="let addon of product.addOns">
               {{ addon.name }} - {{ addon.price | currency }}
             </li>
           </ul>

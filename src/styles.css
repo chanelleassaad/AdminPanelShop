@@ -1,6 +1,10 @@
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --dark-purple: #2d0a75;
+  --medium-purple: #9370db;
   --light-purple: #ebe8fc;
 }

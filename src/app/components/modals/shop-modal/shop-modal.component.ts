@@ -8,7 +8,6 @@ import { IAddOn, IProduct, IShop } from '../../../interfaces';
 @Component({
   selector: 'app-shop-modal',
   templateUrl: './shop-modal.component.html',
-  styleUrls: ['./shop-modal.component.css'],
 })
 export class ShopModalComponent {
   shopForm: FormGroup;
