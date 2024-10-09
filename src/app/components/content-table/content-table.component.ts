@@ -7,6 +7,7 @@ import { CustomerModalComponent } from '../modals/customer-modal/customer-modal.
 import { ShopModalComponent } from '../modals/shop-modal/shop-modal.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-content-table',
@@ -26,7 +27,10 @@ export class ContentTableComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.fetchData();
@@ -82,25 +86,26 @@ export class ContentTableComponent implements OnInit {
 
   // open the edit dialog for Customers or Shops and refresh the data afterwards
   onEdit(element: any): void {
-    let dialogRef;
     if (this.label === 'Customers') {
-      dialogRef = this.dialog.open(CustomerModalComponent, { data: element });
+      this.router.navigate([
+        '/candy-shop/details-management/customer-details',
+        element.id,
+      ]);
     } else if (this.label === 'Shops') {
-      dialogRef = this.dialog.open(ShopModalComponent, { data: element });
-    }
-
-    dialogRef?.afterClosed().subscribe((updatedData) => {
-      if (updatedData) {
-        // update dataSource with the new changes
-        const index = this.dataSource.data.findIndex(
-          (item) => item.id === updatedData.id,
-        );
-        if (index !== -1) {
-          this.dataSource.data[index] = updatedData;
+      const dialogRef = this.dialog.open(ShopModalComponent, { data: element });
+      dialogRef?.afterClosed().subscribe((updatedData) => {
+        if (updatedData) {
+          // update dataSource with the new changes
+          const index = this.dataSource.data.findIndex(
+            (item) => item.id === updatedData.id,
+          );
+          if (index !== -1) {
+            this.dataSource.data[index] = updatedData;
+          }
+          this.dataSource.data = [...this.dataSource.data]; // trigger change detection by reassigning
         }
-        this.dataSource.data = [...this.dataSource.data]; // trigger change detection by reassigning
-      }
-    });
+      });
+    }
   }
 
   onDelete(element: any): void {

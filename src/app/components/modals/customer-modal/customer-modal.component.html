@@ -1,5 +1,5 @@
 <div class="w-[75vw]">
-  <h2 mat-dialog-title>{{ data ? "Edit Customer" : "Add Customer" }}</h2>
+  <h2 mat-dialog-title>Add Customer</h2>
 
   <mat-dialog-content>
     <form class="min-w-[150px] max-w-[500px] w-full" [formGroup]="customerForm">
@@ -37,7 +37,7 @@
         />
         <button
           mat-icon-button
-          matSuffix
+          matIconSuffix
           (click)="clickEvent($event)"
           [attr.aria-label]="'Hide password'"
           [attr.aria-pressed]="hide()"
@@ -98,45 +98,6 @@
       <button mat-button color="primary" (click)="addAddress()">
         Add Address
       </button>
-
-      <div *ngIf="data">
-        <p>Orders</p>
-        <div formArrayName="orders">
-          <div
-            *ngFor="let order of orders.controls; let i = index"
-            [formGroupName]="i"
-          >
-            <table class="w-full">
-              <tr>
-                <td class="pr-[8px]">
-                  <mat-form-field class="w-full">
-                    <mat-label>Order ID</mat-label>
-                    <input matInput formControlName="orderId" readonly />
-                  </mat-form-field>
-                </td>
-                <td class="pr-[8px]">
-                  <mat-form-field class="w-full">
-                    <mat-label>Date</mat-label>
-                    <input matInput formControlName="date" readonly />
-                  </mat-form-field>
-                </td>
-                <td class="pr-[8px]">
-                  <mat-form-field class="w-full">
-                    <mat-label>Total</mat-label>
-                    <input matInput formControlName="total" readonly />
-                  </mat-form-field>
-                </td>
-                <td class="pr-[8px]">
-                  <mat-form-field class="w-full">
-                    <mat-label>Status</mat-label>
-                    <input matInput formControlName="status" readonly />
-                  </mat-form-field>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </div>
-      </div>
     </form>
   </mat-dialog-content>
 

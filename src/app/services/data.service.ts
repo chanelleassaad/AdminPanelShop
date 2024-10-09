@@ -37,6 +37,14 @@ export class DataService {
   }
 
   // Customers
+  getCustomerById(id: string) {
+    return this.customers$.pipe(
+      map((customers) =>
+        customers.find((customer) => customer.id.toString() === id),
+      ),
+    );
+  }
+
   updateCustomer(updatedCustomer: ICustomer): void {
     const customers = this.customersSubject.getValue();
     const index = customers.findIndex(
@@ -47,6 +55,7 @@ export class DataService {
     this.customersSubject.next(customers);
     console.log(this.customersSubject);
   }
+
   deleteCustomer(customerId: number): void {
     this.customers$
       .pipe(
@@ -58,6 +67,7 @@ export class DataService {
         this.customersSubject.next(updatedCustomers),
       );
   }
+
   addCustomer(newCustomer: ICustomer): void {
     const currentCustomers = this.customersSubject.getValue();
 
@@ -79,8 +89,12 @@ export class DataService {
   // Shops
   updateShop(shop: IShop): void {
     const shops = this.shopsSubject.getValue();
-    const index = shops.findIndex((customer) => customer.id === shop.id);
-    shops[index] = { ...shops[index], ...shop };
-    this.shopsSubject.next(shops);
+    const index = shops.findIndex(
+      (existingShop) => existingShop.id === shop.id,
+    );
+    if (index !== -1) {
+      shops[index] = { ...shops[index], ...shop };
+      this.shopsSubject.next(shops);
+    }
   }
 }

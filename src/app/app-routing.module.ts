@@ -5,6 +5,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { DetailsManagementComponent } from './pages/details-management/details-management.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { UnauthGuard } from './guards/unauth.guard';
+import { CustomerDetailsComponent } from './components/customer-details/customer-details.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,11 @@ const routes: Routes = [
       {
         path: 'details-management/:label',
         component: DetailsManagementComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'details-management/customer-details/:id',
+        component: CustomerDetailsComponent,
         canActivate: [AuthGuard],
       },
     ],
