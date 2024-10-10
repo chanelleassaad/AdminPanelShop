@@ -1,0 +1,35 @@
+<form [formGroup]="customerForm">
+  <div formArrayName="orders" class="space-y-4">
+    <!-- Display 'No Orders' message if the orders array is empty -->
+    <div *ngIf="orders.length === 0" class="text-center text-gray-500">
+      No orders
+    </div>
+
+    <!-- Loop through orders if they exist -->
+    <div
+      *ngFor="let order of orders.controls; let i = index"
+      [formGroupName]="i"
+    >
+      <h3 class="text-xs p-2.5 font-light lg:hidden">Order {{ i + 1 }}</h3>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <mat-form-field class="w-full">
+          <mat-label>Order ID</mat-label>
+          <input matInput formControlName="orderId" readonly />
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <mat-label>Date</mat-label>
+          <input matInput formControlName="date" readonly />
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <mat-label>Total</mat-label>
+          <input matInput formControlName="total" readonly />
+        </mat-form-field>
+        <mat-form-field class="w-full">
+          <mat-label>Status</mat-label>
+          <input matInput formControlName="status" readonly />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,104 +1,15 @@
-<div class="w-[75vw]">
-  <h2 mat-dialog-title>Add Customer</h2>
+<div class="max-w-[90vw] mx-auto">
+  <h2 mat-dialog-title class="text-center">Add Customer</h2>
 
   <mat-dialog-content>
-    <form class="min-w-[150px] max-w-[500px] w-full" [formGroup]="customerForm">
-      <mat-form-field class="w-full">
-        <mat-label>Full Name</mat-label>
-        <input matInput formControlName="name" />
-      </mat-form-field>
-
-      <table class="w-full">
-        <mat-error style="font-size: 15px" *ngIf="errorMessage">{{
-          errorMessage
-        }}</mat-error>
-        <tr>
-          <td class="pr-[8px]">
-            <mat-form-field class="w-full">
-              <mat-label>Username</mat-label>
-              <input matInput formControlName="username" />
-            </mat-form-field>
-          </td>
-          <td class="pr-[8px]">
-            <mat-form-field class="w-full">
-              <mat-label>Email</mat-label>
-              <input matInput formControlName="email" />
-            </mat-form-field>
-          </td>
-        </tr>
-      </table>
-
-      <mat-form-field class="w-full">
-        <mat-label>Password</mat-label>
-        <input
-          matInput
-          formControlName="password"
-          [type]="hide() ? 'password' : 'text'"
-        />
-        <button
-          mat-icon-button
-          matIconSuffix
-          (click)="clickEvent($event)"
-          [attr.aria-label]="'Hide password'"
-          [attr.aria-pressed]="hide()"
-        >
-          <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
-        </button>
-        <mat-error
-          *ngIf="customerForm.get('password')?.hasError('passwordStrength')"
-          >Password must be at least 8 characters long, contain 1 uppercase, 1
-          lowercase letter, 1 special character, and 1 number.
-        </mat-error>
-      </mat-form-field>
-
-      <p>Address</p>
-      <div formArrayName="addresses">
-        <div
-          *ngFor="let address of addresses.controls; let i = index"
-          [formGroupName]="i"
-        >
-          <table class="w-full">
-            <tr>
-              <td class="pr-[8px]">
-                <mat-form-field class="w-full">
-                  <mat-label>Street</mat-label>
-                  <input matInput formControlName="street" />
-                </mat-form-field>
-              </td>
-              <td class="pr-[8px]">
-                <mat-form-field class="w-full">
-                  <mat-label>City</mat-label>
-                  <input matInput formControlName="city" />
-                </mat-form-field>
-              </td>
-              <td class="pr-[8px]">
-                <mat-form-field class="w-full">
-                  <mat-label>Postal Code</mat-label>
-                  <input
-                    matInput
-                    formControlName="zip"
-                    maxlength="5"
-                    placeholder="Ex. 94105"
-                  />
-                </mat-form-field>
-              </td>
-              <td>
-                <button
-                  mat-icon-button
-                  *ngIf="i > 0"
-                  (click)="deleteAddress(i)"
-                >
-                  <mat-icon>delete</mat-icon>
-                </button>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
-      <button mat-button color="primary" (click)="addAddress()">
-        Add Address
-      </button>
-    </form>
+    <app-customer-credentials
+      [customerForm]="customerForm"
+      [errorMessage]="errorMessage"
+      (saveChanges)="onSave()"
+    ></app-customer-credentials>
+    <app-customer-addresses
+      [customerForm]="customerForm"
+    ></app-customer-addresses>
   </mat-dialog-content>
 
   <mat-dialog-actions align="end">

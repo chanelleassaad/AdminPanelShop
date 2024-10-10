@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { map, tap } from 'rxjs/operators';
 
@@ -16,8 +16,15 @@ export class DashboardComponent implements OnInit {
 
   constructor(private dataService: DataService) {}
 
+  isSmallScreen = false;
+  @HostListener('window:resize', ['$event'])
   ngOnInit(): void {
+    this.onResize(null);
     this.loadData();
+  }
+
+  onResize(event: any) {
+    this.isSmallScreen = window.innerWidth < 768;
   }
 
   loadData(): void {

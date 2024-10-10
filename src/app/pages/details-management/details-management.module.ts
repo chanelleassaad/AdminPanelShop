@@ -29,6 +29,9 @@ import { MatOption, MatSelect } from '@angular/material/select';
 import { MatLabel } from '@angular/material/form-field';
 import { CustomerDetailsComponent } from '../../components/customer-details/customer-details.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { CustomerCredentialsComponent } from '../../components/customer-input/customer-credentials/customer-credentials.component';
+import { CustomerAddressesComponent } from '../../components/customer-input/customer-addresses/customer-addresses.component';
+import { CustomerOrdersComponent } from '../../components/customer-input/customer-orders/customer-orders.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,9 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     CustomerModalComponent,
     ShopModalComponent,
     CustomerDetailsComponent,
+    CustomerCredentialsComponent,
+    CustomerAddressesComponent,
+    CustomerOrdersComponent,
   ],
   imports: [
     CommonModule,

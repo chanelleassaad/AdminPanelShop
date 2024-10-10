@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { DataService } from '../../services/data.service';
 import { passwordValidator } from '../../../validators/password-validator';
@@ -13,7 +13,6 @@ import { take } from 'rxjs';
 })
 export class CustomerDetailsComponent {
   customerForm!: FormGroup;
-  hide = signal(true);
   errorMessage: string | null = null;
   customerId: string | null;
   customerName: string | undefined;
@@ -58,14 +57,6 @@ export class CustomerDetailsComponent {
     return this.customerForm.get('addresses') as FormArray;
   }
 
-  addAddress(): void {
-    this.addresses.push(this.createAddressGroup());
-  }
-
-  deleteAddress(index: number): void {
-    this.addresses.removeAt(index);
-  }
-
   private loadCustomerData(id: string): void {
     this.dataService.getCustomerById(id).subscribe((customer) => {
       if (customer) {
@@ -79,7 +70,13 @@ export class CustomerDetailsComponent {
 
   private setAddresses(addresses: IAddress[]): void {
     const addressArray = this.fb.array(
-      addresses.map((address) => this.fb.group(address)),
+      addresses.map((address) =>
+        this.fb.group({
+          street: [address.street, Validators.required],
+          city: [address.city, Validators.required],
+          zip: [address.zip, Validators.required],
+        }),
+      ),
     );
     this.customerForm.setControl('addresses', addressArray);
   }
@@ -131,11 +128,6 @@ export class CustomerDetailsComponent {
 
   goBack(): void {
     this.router.navigate(['candy-shop/details-management/customers']);
-  }
-
-  clickEvent(event: MouseEvent): void {
-    this.hide.set(!this.hide());
-    event.stopPropagation();
   }
 
   openSnackbar(message: string, action: string) {

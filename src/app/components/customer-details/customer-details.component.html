@@ -8,7 +8,13 @@
         Edit Customer: {{ customerName }}
       </h2>
     </div>
-    <button mat-stroked-button (click)="onSave()">Save Changes</button>
+    <button
+      mat-stroked-button
+      (click)="onSave()"
+      [disabled]="!customerForm.valid"
+    >
+      Save Changes
+    </button>
   </div>
 
   <!-- Space between contents and tabs -->
@@ -16,138 +22,25 @@
     <!-- Customer Details Tab -->
     <mat-tab label="Details">
       <div class="mb-3"></div>
-      <form [formGroup]="customerForm" class="space-y-4">
-        <mat-form-field class="w-full">
-          <mat-label>Full Name</mat-label>
-          <input matInput formControlName="name" />
-        </mat-form-field>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <mat-form-field class="w-full">
-            <mat-label>Username</mat-label>
-            <input matInput formControlName="username" />
-          </mat-form-field>
-          <mat-form-field class="w-full">
-            <mat-label>Email</mat-label>
-            <input matInput formControlName="email" />
-          </mat-form-field>
-        </div>
-
-        <mat-form-field class="w-full">
-          <mat-label>Password</mat-label>
-          <input
-            matInput
-            formControlName="password"
-            [type]="hide() ? 'password' : 'text'"
-          />
-          <button
-            mat-icon-button
-            matIconSuffix
-            (click)="clickEvent($event)"
-            [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide()"
-          >
-            <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
-          </button>
-          <mat-error
-            *ngIf="customerForm.get('password')?.hasError('passwordStrength')"
-          >
-            Password must be at least 8 characters, include 1 uppercase, 1
-            lowercase, 1 special character, and 1 number.
-          </mat-error>
-        </mat-form-field>
-
-        <mat-error *ngIf="errorMessage" class="text-sm">{{
-          errorMessage
-        }}</mat-error>
-      </form>
+      <app-customer-credentials
+        [customerForm]="customerForm"
+        [errorMessage]="errorMessage"
+        (saveChanges)="onSave()"
+      ></app-customer-credentials>
     </mat-tab>
 
     <!-- Addresses Tab -->
     <mat-tab label="Addresses">
       <div class="mt-3"></div>
-      <form [formGroup]="customerForm" class="overflow-y-hidden">
-        <div formArrayName="addresses">
-          <div
-            *ngFor="let address of addresses.controls; let i = index"
-            [formGroupName]="i"
-          >
-            <div class="flex items-center">
-              <h3 class="text-xs p-2.5 font-light">Address {{ i }}</h3>
-              <button
-                mat-icon-button
-                *ngIf="i > 0"
-                (click)="deleteAddress(i)"
-                class="p-0"
-                aria-label="Delete address"
-              >
-                <mat-icon class="text-sm">delete</mat-icon>
-              </button>
-            </div>
-
-            <div
-              class="flex flex-col sm:flex-row items-center sm:space-y-0 sm:space-x-4"
-            >
-              <mat-form-field class="w-full sm:w-1/4">
-                <mat-label>Street</mat-label>
-                <input matInput formControlName="street" />
-              </mat-form-field>
-              <mat-form-field class="w-full sm:w-1/4">
-                <mat-label>City</mat-label>
-                <input matInput formControlName="city" />
-              </mat-form-field>
-              <mat-form-field class="w-full sm:w-1/4">
-                <mat-label>Postal Code</mat-label>
-                <input
-                  matInput
-                  formControlName="zip"
-                  maxlength="5"
-                  placeholder="Ex. 94105"
-                />
-              </mat-form-field>
-            </div>
-          </div>
-        </div>
-        <button mat-button color="primary" (click)="addAddress()">
-          Add Address
-        </button>
-      </form>
+      <app-customer-addresses
+        [customerForm]="customerForm"
+      ></app-customer-addresses>
     </mat-tab>
 
     <!-- Orders Tab -->
     <mat-tab label="Orders">
       <div class="mb-3"></div>
-      <form [formGroup]="customerForm">
-        <div formArrayName="orders" class="space-y-4">
-          <div
-            *ngFor="let order of orders.controls; let i = index"
-            [formGroupName]="i"
-          >
-            <h3 class="text-xs p-2.5 font-light lg:hidden">Order {{ i }}</h3>
-
-            <div
-              class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4"
-            >
-              <mat-form-field class="w-full">
-                <mat-label>Order ID</mat-label>
-                <input matInput formControlName="orderId" readonly />
-              </mat-form-field>
-              <mat-form-field class="w-full">
-                <mat-label>Date</mat-label>
-                <input matInput formControlName="date" readonly />
-              </mat-form-field>
-              <mat-form-field class="w-full">
-                <mat-label>Total</mat-label>
-                <input matInput formControlName="total" readonly />
-              </mat-form-field>
-              <mat-form-field class="w-full">
-                <mat-label>Status</mat-label>
-                <input matInput formControlName="status" readonly />
-              </mat-form-field>
-            </div>
-          </div>
-        </div>
-      </form>
+      <app-customer-orders [customerForm]="customerForm"></app-customer-orders>
     </mat-tab>
   </mat-tab-group>
 </div>

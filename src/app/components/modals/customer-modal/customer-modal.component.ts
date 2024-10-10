@@ -28,25 +28,13 @@ export class CustomerModalComponent {
       password: ['', [Validators.required, passwordValidator()]],
       addresses: this.fb.array([
         this.fb.group({
-          street: [''],
-          city: [''],
-          zip: [''],
+          street: ['', Validators.required],
+          city: ['', Validators.required],
+          zip: ['', Validators.required],
         }),
       ]),
-      orders: this.fb.array([
-        this.fb.group({
-          orderId: [''],
-          date: [''],
-          total: [''],
-          status: [''],
-        }),
-      ]),
+      orders: this.fb.array([]),
     });
-  }
-
-  clickEvent(event: MouseEvent) {
-    this.hide.set(!this.hide());
-    event.stopPropagation();
   }
 
   onNoClick() {
@@ -89,18 +77,5 @@ export class CustomerModalComponent {
   // Address methods to display/add/delete several addresses
   get addresses() {
     return this.customerForm.get('addresses') as FormArray;
-  }
-  addAddress() {
-    const addresses = this.customerForm.get('addresses') as FormArray;
-    addresses.push(
-      this.fb.group({
-        street: ['', Validators.required],
-        city: ['', Validators.required],
-        zip: ['', Validators.required],
-      }),
-    );
-  }
-  deleteAddress(index: number): void {
-    this.addresses.removeAt(index);
   }
 }
