@@ -1,23 +1,23 @@
-<div class="w-[60vw]">
+<div class="w-[80vw] max-w-[1200px] mx-auto">
   <h2 mat-dialog-title>Edit Shop</h2>
 
   <mat-dialog-content>
     <form [formGroup]="shopForm">
-      <div class="flex items-start gap-2.5">
-        <div class="flex-1">
+      <div class="flex flex-wrap items-start gap-2.5">
+        <div class="flex-1 min-w-[200px]">
           <img
             [src]="shopForm.get('image')?.value"
             alt="Shop Image"
+            class="max-w-full h-auto"
             height="200px"
-            width="auto"
           />
         </div>
-        <div class="flex-2 flex flex-col gap-2.5 w-[60%]">
-          <mat-form-field class="example-full-width">
+        <div class="flex-2 flex flex-col gap-2.5 w-full sm:w-[60%]">
+          <mat-form-field class="example-full-width w-full">
             <mat-label>Name</mat-label>
             <input matInput formControlName="name" />
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field class="w-full">
             <mat-label>Currency</mat-label>
             <mat-select formControlName="currency">
               <mat-option value="USD">USD</mat-option>
