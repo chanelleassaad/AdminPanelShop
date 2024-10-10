@@ -28,33 +28,37 @@
         </div>
       </div>
 
-      <!-- Display products with checkboxes -->
       <h3 class="pt-5">Products</h3>
-      <div class="flex flex-wrap gap-[16px]">
-        <div
-          *ngFor="let product of products"
-          class="flex-1 min-w-[calc(50%-16px)] box-border border-b border-gray-300"
-        >
-          <mat-checkbox
-            [checked]="isProductChecked(product.id)"
-            (change)="toggleProduct(product.id, $event.checked)"
-            [disabled]="!product.available"
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Products</mat-label>
+        <mat-select [formControl]="selectedProducts" multiple>
+          <mat-option>
+            <ngx-mat-select-search
+              [formControl]="productSearchCtrl"
+            ></ngx-mat-select-search>
+          </mat-option>
+          <mat-option
+            *ngFor="let product of filteredProductsMulti | async"
+            [value]="Number(product.id)"
           >
             {{ product.productName }} - {{ product.price | currency }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div
+        *ngFor="let selectedProductId of selectedProducts.value"
+        class="mt-4"
+      >
+        <h4>{{ getProductName(selectedProductId) }}</h4>
+        <h6 class="m-0 pl-2.5 text-xs">Add-Ons</h6>
+        <div *ngFor="let addOn of getAddOns(selectedProductId)" class="pl-5">
+          <mat-checkbox
+            [checked]="isAddOnChecked(selectedProductId, addOn.id)"
+            (change)="toggleAddOn(selectedProductId, addOn.id, $event.checked)"
+          >
+            {{ addOn.name }} (+{{ addOn.price | currency }})
           </mat-checkbox>
-          <!-- Add-ons Section -->
-          <div *ngIf="product.addOns.length">
-            <h6 class="m-0 pl-2.5 text-xs">Add-Ons</h6>
-            <div *ngFor="let addOn of product.addOns" class="pl-5">
-              <mat-checkbox
-                [checked]="isAddOnChecked(product.id, addOn.id)"
-                [disabled]="!product.available || !isProductChecked(product.id)"
-                (change)="toggleAddOn(product.id, addOn.id, $event.checked)"
-              >
-                {{ addOn.name }} (+{{ addOn.price | currency }})
-              </mat-checkbox>
-            </div>
-          </div>
         </div>
       </div>
     </form>

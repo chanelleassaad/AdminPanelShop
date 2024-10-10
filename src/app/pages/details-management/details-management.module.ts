@@ -28,6 +28,7 @@ import { CommonModule } from '@angular/common';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { MatLabel } from '@angular/material/form-field';
 import { CustomerDetailsComponent } from '../../components/customer-details/customer-details.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { CustomerDetailsComponent } from '../../components/customer-details/cust
     MatLabel,
     MatSelect,
     MatSuffix,
+    NgxMatSelectSearchModule,
   ],
 })
 export class DetailsManagementModule {}

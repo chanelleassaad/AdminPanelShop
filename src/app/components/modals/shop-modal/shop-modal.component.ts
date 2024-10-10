@@ -1,19 +1,31 @@
-import { Component, inject } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ContentTableComponent } from '../../content-table/content-table.component';
 import { DataService } from '../../../services/data.service';
 import { IAddOn, IProduct, IShop } from '../../../interfaces';
+import { ReplaySubject, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-shop-modal',
   templateUrl: './shop-modal.component.html',
 })
-export class ShopModalComponent {
+export class ShopModalComponent implements OnInit, OnDestroy {
   shopForm: FormGroup;
   products: IProduct[] = [];
+  selectedProducts: FormControl<number[]> = new FormControl<number[]>([], {
+    nonNullable: true,
+  });
+  productSearchCtrl: FormControl<string> = new FormControl<string>('', {
+    nonNullable: true,
+  });
+  filteredProductsMulti: ReplaySubject<IProduct[]> = new ReplaySubject<
+    IProduct[]
+  >(1);
+  protected _onDestroy = new Subject<void>();
   readonly data = inject<any>(MAT_DIALOG_DATA);
   dialogRef = inject(MatDialogRef<ContentTableComponent>);
+  protected readonly Number = Number;
 
   constructor(
     private fb: FormBuilder,
@@ -27,91 +39,119 @@ export class ShopModalComponent {
       currency: [this.data.currency],
       products: this.fb.array([]),
     });
-
-    this.getProducts();
-    this.initProducts();
   }
 
-  getProducts() {
+  ngOnInit() {
+    const selectedProductIds = this.data.products.map(
+      (product: any) => product.productId,
+    );
+
+    this.selectedProducts.setValue(selectedProductIds);
+    this.initializeProducts();
+
+    this.filteredProductsMulti.next(this.products.slice());
+    this.productSearchCtrl.valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterProductsMulti();
+      });
+
+    // Sync FormArray with selected products
+    this.selectedProducts.valueChanges.subscribe(
+      (selectedProductIds: number[]) => {
+        this.syncProductsArray(selectedProductIds);
+      },
+    );
+  }
+
+  ngOnDestroy() {
+    this._onDestroy.next();
+    this._onDestroy.complete();
+  }
+
+  // Sync selected products with FormArray
+  syncProductsArray(selectedProductIds: number[]) {
+    const productsArray = this.shopForm.get('products') as FormArray;
+
+    const existingProductIds = new Set(
+      productsArray.controls.map((control) => control.get('productId')?.value),
+    );
+
+    selectedProductIds.forEach((productId) => {
+      if (!existingProductIds.has(productId)) {
+        const product = this.products.find((p) => Number(p.id) === productId);
+        if (product) {
+          const productAddOns = this.fb.group({
+            productId: [Number(product.id)],
+            selectedAddOns: this.fb.array([]),
+          });
+          productsArray.push(productAddOns);
+        }
+      }
+    });
+
+    productsArray.controls.forEach((control, index) => {
+      const productId = control.get('productId')?.value;
+      if (!selectedProductIds.includes(productId)) {
+        productsArray.removeAt(index);
+      }
+    });
+  }
+
+  initializeProducts() {
     this.dataService.products$.subscribe((products: IProduct[]) => {
       this.products = products;
-      this.initProducts();
-    });
-  }
+      const productsArray = this.shopForm.get('products') as FormArray;
+      productsArray.clear();
 
-  initProducts() {
-    const productsArray = this.shopForm.get('products') as FormArray;
-    productsArray.clear(); // clear existing products if any
-
-    this.data.products.forEach((product: any) => {
-      const productAddOns = this.fb.group({
-        productId: [product.productId],
-        selectedAddOns:
-          this.fb.array(
+      this.data.products.forEach((product: any) => {
+        const productAddOns = this.fb.group({
+          productId: [product.productId],
+          selectedAddOns: this.fb.array(
             product.addOns.map((addOn: IAddOn) => this.fb.control(addOn)),
-          ) || [],
+          ),
+        });
+        productsArray.push(productAddOns);
       });
-      productsArray.push(productAddOns);
+
+      // Set the selected product IDs to the selectedProducts
+      const selectedProductIds: number[] = this.data.products.map(
+        (product: any) => product.productId,
+      );
+      this.selectedProducts.setValue(selectedProductIds);
     });
   }
 
-  isProductChecked(productId: number): boolean {
-    const products = this.shopForm.value.products as { productId: number }[];
-    return products.some((product) => product.productId === productId);
+  // Get product name by ID
+  getProductName(productId: number): string {
+    const product = this.products.find((p) => Number(p.id) === productId);
+    return product ? product.productName : '';
   }
 
+  //AddOns Functions
   isAddOnChecked(productId: number, addOnId: number): boolean {
     const products = this.shopForm.value.products as {
       productId: number;
       selectedAddOns: number[];
     }[];
-
-    // find the product with the specified productId
-    const product = products.find((p) => p.productId === productId);
-
-    // return whether the addOnId is included in the selectedAddOns of the found product
+    const product = products.find((p) => Number(p.productId) === productId);
     return product ? product.selectedAddOns.includes(addOnId) : false;
   }
-
-  toggleProduct(productId: number, checked: boolean) {
-    const productsArray = this.shopForm.get('products') as FormArray;
-
-    // find the FormGroup for the specific productId
-    const productControl = productsArray.controls.find(
-      (control) => (control as FormGroup).get('productId')?.value === productId,
-    ) as FormGroup;
-
-    if (productControl) {
-      // if !checked, remove the product and clear its add-ons
-      if (!checked) {
-        productsArray.removeAt(productsArray.controls.indexOf(productControl));
-      }
-    } else if (checked) {
-      // if checked, add the product with empty add-ons
-      const newProductControl = this.fb.group({
-        productId: [productId],
-        selectedAddOns: this.fb.array([]),
-      });
-      productsArray.push(newProductControl);
-    }
+  getAddOns(productId: number): IAddOn[] {
+    const product = this.products.find((p) => Number(p.id) === productId);
+    return product ? product.addOns : [];
   }
-
   toggleAddOn(productId: number, addOnId: number, checked: boolean) {
     const productsArray = this.shopForm.get('products') as FormArray;
-
-    // find the FormGroup for the specific productId
     const productControl = productsArray.controls.find(
       (control) => (control as FormGroup).get('productId')?.value === productId,
     ) as FormGroup;
 
     if (productControl) {
       const selectedAddOns = productControl.get('selectedAddOns') as FormArray;
-
       if (checked) {
-        // add the add-on if checked
         selectedAddOns.push(this.fb.control(addOnId));
       } else {
-        // remove the add-on if unchecked
         const index = selectedAddOns.controls.findIndex(
           (control) => control.value === addOnId,
         );
@@ -122,6 +162,28 @@ export class ShopModalComponent {
     }
   }
 
+  // Filter products
+  protected filterProductsMulti() {
+    if (!this.products) {
+      return;
+    }
+    // get the search keyword
+    let search = this.productSearchCtrl.value;
+    if (!search) {
+      this.filteredProductsMulti.next(this.products.slice());
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+    // filter the products
+    this.filteredProductsMulti.next(
+      this.products.filter((product) =>
+        product.productName.toLowerCase().includes(search),
+      ),
+    );
+  }
+
+  // Buttons Functions
   onNoClick() {
     this.dialogRef.close();
   }
