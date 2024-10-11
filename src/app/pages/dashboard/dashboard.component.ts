@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, inject } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { map, tap } from 'rxjs/operators';
 import { MatGridList, MatGridTile } from '@angular/material/grid-list';
@@ -19,14 +19,14 @@ import { CurrencyPipe } from '@angular/common';
   ],
 })
 export class DashboardComponent implements OnInit {
+  private dataService = inject(DataService);
+
   productChartOptions: any;
   orderChartOptions: any;
   revenueChartOptions: any;
 
   numberOfCustomers = 0;
   products: any[] = [];
-
-  constructor(private dataService: DataService) {}
 
   isSmallScreen = false;
   @HostListener('window:resize', ['$event'])

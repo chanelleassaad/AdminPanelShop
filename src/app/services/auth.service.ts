@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -8,9 +8,9 @@ import { ILoginCredentials } from '../interfaces';
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:3000'; //JSON server URL
+  private http = inject(HttpClient);
 
-  constructor(private http: HttpClient) {}
+  private baseUrl = 'http://localhost:3000';
 
   login(email: string, password: string): Observable<ILoginCredentials | null> {
     // Fetch users from the server

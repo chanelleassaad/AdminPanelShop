@@ -40,6 +40,9 @@ import { MatIconButton } from '@angular/material/button';
 ],
 })
 export class ContentTableComponent implements OnInit {
+  private dataService = inject(DataService);
+  private router = inject(Router);
+
   @Input() label = ''; // 'Customers', 'Shops', 'Orders'
 
   // Use MatTableDataSource instead of a plain array for data source
@@ -52,11 +55,6 @@ export class ContentTableComponent implements OnInit {
   readonly dialog = inject(MatDialog);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  constructor(
-    private dataService: DataService,
-    private router: Router,
-  ) {}
 
   ngOnInit(): void {
     this.fetchData();

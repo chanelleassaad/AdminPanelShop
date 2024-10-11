@@ -1,20 +1,34 @@
-import { Component, signal } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component, signal, inject } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { MatCard, MatCardContent, MatCardActions } from '@angular/material/card';
+import {
+  MatCard,
+  MatCardContent,
+  MatCardActions,
+} from '@angular/material/card';
 import { MatTabGroup, MatTab } from '@angular/material/tabs';
-import { MatFormField, MatInput, MatError, MatSuffix } from '@angular/material/input';
+import {
+  MatFormField,
+  MatInput,
+  MatError,
+  MatSuffix,
+} from '@angular/material/input';
 import { MatLabel } from '@angular/material/form-field';
-
 import { MatIconButton, MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    standalone: true,
-    imports: [
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  standalone: true,
+  imports: [
     MatCard,
     MatTabGroup,
     MatTab,
@@ -29,20 +43,20 @@ import { MatIcon } from '@angular/material/icon';
     MatSuffix,
     MatIcon,
     MatCardActions,
-    MatButton
-],
+    MatButton,
+  ],
 })
 export class LoginComponent {
+  private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
   loginForm: FormGroup;
   errorMessage: string | null = null;
 
   hide = signal(true);
 
-  constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router,
-  ) {
+  constructor() {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],

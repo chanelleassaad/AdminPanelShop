@@ -14,33 +14,33 @@ import { CustomerAddressesComponent } from '../customer-input/customer-addresses
 import { CustomerOrdersComponent } from '../customer-input/customer-orders/customer-orders.component';
 
 @Component({
-    selector: 'app-customer-details',
-    templateUrl: './customer-details.component.html',
-    standalone: true,
-    imports: [
-        MatIconButton,
-        MatIcon,
-        MatButton,
-        MatTabGroup,
-        MatTab,
-        CustomerCredentialsComponent,
-        CustomerAddressesComponent,
-        CustomerOrdersComponent,
-    ],
+  selector: 'app-customer-details',
+  templateUrl: './customer-details.component.html',
+  standalone: true,
+  imports: [
+    MatIconButton,
+    MatIcon,
+    MatButton,
+    MatTabGroup,
+    MatTab,
+    CustomerCredentialsComponent,
+    CustomerAddressesComponent,
+    CustomerOrdersComponent,
+  ],
 })
 export class CustomerDetailsComponent {
+  private fb = inject(FormBuilder);
+  private dataService = inject(DataService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private _snackBar = inject(MatSnackBar);
+
   customerForm!: FormGroup;
   errorMessage: string | null = null;
   customerId: string | null;
   customerName: string | undefined;
-  private _snackBar = inject(MatSnackBar);
 
-  constructor(
-    private fb: FormBuilder,
-    private dataService: DataService,
-    private route: ActivatedRoute,
-    private router: Router,
-  ) {
+  constructor() {
     this.customerId = this.route.snapshot.paramMap.get('id');
 
     this.customerForm = this.createCustomerForm();

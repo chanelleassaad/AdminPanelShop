@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -8,6 +8,8 @@ import { ICustomer, IProduct, IShop } from '../interfaces';
   providedIn: 'root',
 })
 export class DataService {
+  private http = inject(HttpClient);
+
   private baseUrl = 'http://localhost:3000';
 
   // rxjs storage for instant updates
@@ -19,7 +21,7 @@ export class DataService {
   shops$ = this.shopsSubject.asObservable();
   products$ = this.productsSubject.asObservable();
 
-  constructor(private http: HttpClient) {
+  constructor() {
     this.loadInitialData();
   }
 

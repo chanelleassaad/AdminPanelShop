@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatIconButton, MatButton } from '@angular/material/button';
@@ -22,8 +22,9 @@ import { MatLabel } from '@angular/material/form-field';
 ],
 })
 export class CustomerAddressesComponent {
+  private fb = inject(FormBuilder);
+
   @Input() customerForm!: FormGroup;
-  constructor(private fb: FormBuilder) {}
 
   get addresses(): FormArray {
     return this.customerForm.get('addresses') as FormArray;

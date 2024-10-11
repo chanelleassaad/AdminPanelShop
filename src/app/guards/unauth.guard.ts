@@ -1,11 +1,12 @@
 import { CanActivate, Router } from '@angular/router';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UnauthGuard implements CanActivate {
-  constructor(private router: Router) {}
+  private router = inject(Router);
+
 
   canActivate(): boolean {
     const user = localStorage.getItem('currentUser');

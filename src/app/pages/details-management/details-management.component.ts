@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { MatTabGroup, MatTab } from '@angular/material/tabs';
@@ -16,11 +16,11 @@ import { ContentTableComponent } from '../../components/content-table/content-ta
 ],
 })
 export class DetailsManagementComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+
   labels = ['Customers', 'Shops', 'Orders'];
   label: string | null = 'Customers';
   selected = new FormControl(0);
-
-  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {

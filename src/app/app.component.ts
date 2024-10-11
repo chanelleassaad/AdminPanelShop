@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { MatDrawer, MatSidenavContainer, MatSidenav, MatSidenavContent } from '@angular/material/sidenav';
 import { MatToolbar } from '@angular/material/toolbar';
@@ -25,6 +25,8 @@ import { MatNavList, MatListItem } from '@angular/material/list';
 ],
 })
 export class AppComponent {
+  private router = inject(Router);
+
   title = 'azsft';
   menuItems = [
     {
@@ -60,8 +62,6 @@ export class AppComponent {
   ];
 
   protected readonly localStorage = localStorage;
-
-  constructor(private router: Router) {}
 
   signOut() {
     this.router.navigate(['candy-shop/login']);

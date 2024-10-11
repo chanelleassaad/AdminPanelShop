@@ -41,6 +41,9 @@ import { MatButton } from '@angular/material/button';
 ],
 })
 export class ShopModalComponent implements OnInit, OnDestroy {
+  private fb = inject(FormBuilder);
+  private dataService = inject(DataService);
+
   shopForm: FormGroup;
   products: IProduct[] = [];
   selectedProducts: FormControl<number[]> = new FormControl<number[]>([], {
@@ -57,10 +60,7 @@ export class ShopModalComponent implements OnInit, OnDestroy {
   dialogRef = inject(MatDialogRef<ContentTableComponent>);
   protected readonly Number = Number;
 
-  constructor(
-    private fb: FormBuilder,
-    private dataService: DataService,
-  ) {
+  constructor() {
     this.shopForm = this.fb.group({
       id: [this.data.id],
       name: [this.data.name],

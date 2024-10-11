@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 
 @Injectable({
@@ -7,7 +7,8 @@ import { CanActivate, Router } from '@angular/router';
 
 // Guard: Determines if a route can be activated and allows navigation based on certain conditions
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router) {}
+  private router = inject(Router);
+
 
   canActivate(): boolean {
     const user = localStorage.getItem('currentUser');

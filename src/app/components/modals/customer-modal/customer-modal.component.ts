@@ -1,7 +1,13 @@
-import { Component, inject, signal } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialogTitle, MatDialogContent, MatDialogActions } from '@angular/material/dialog';
+import { Component, inject } from '@angular/core';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions,
+} from '@angular/material/dialog';
 import { ContentTableComponent } from '../../content-table/content-table.component';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../../../services/data.service';
 import { passwordValidator } from '../../../../validators/password-validator';
 import { take } from 'rxjs';
@@ -11,30 +17,29 @@ import { CustomerAddressesComponent } from '../../customer-input/customer-addres
 import { MatButton } from '@angular/material/button';
 
 @Component({
-    selector: 'app-customer-modal',
-    templateUrl: './customer-modal.component.html',
-    standalone: true,
-    imports: [
-        MatDialogTitle,
-        CdkScrollable,
-        MatDialogContent,
-        CustomerCredentialsComponent,
-        CustomerAddressesComponent,
-        MatDialogActions,
-        MatButton,
-    ],
+  selector: 'app-customer-modal',
+  templateUrl: './customer-modal.component.html',
+  standalone: true,
+  imports: [
+    MatDialogTitle,
+    CdkScrollable,
+    MatDialogContent,
+    CustomerCredentialsComponent,
+    CustomerAddressesComponent,
+    MatDialogActions,
+    MatButton,
+  ],
 })
 export class CustomerModalComponent {
+  private fb = inject(FormBuilder);
+  private dataService = inject(DataService);
+
   dialogRef = inject(MatDialogRef<ContentTableComponent>);
   customerForm: FormGroup;
   readonly data = inject<any>(MAT_DIALOG_DATA);
-  hide = signal(true);
   errorMessage: string | null = null;
 
-  constructor(
-    private fb: FormBuilder,
-    private dataService: DataService,
-  ) {
+  constructor() {
     this.customerForm = this.fb.group({
       name: ['', Validators.required],
       username: ['', Validators.required],
@@ -86,10 +91,5 @@ export class CustomerModalComponent {
         this.dialogRef.close();
       }
     });
-  }
-
-  // Address methods to display/add/delete several addresses
-  get addresses() {
-    return this.customerForm.get('addresses') as FormArray;
   }
 }
