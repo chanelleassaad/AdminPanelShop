@@ -19,7 +19,6 @@
             {{ column | titlecase }}
           </th>
           <td mat-cell *matCellDef="let element" class="w-2.5">
-            <!-- Products Column -->
             @if (column == "products") {
               {{ element.products ? element.products.length : 0 }}
             } @else {

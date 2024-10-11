@@ -10,7 +10,7 @@
             alt="Shop Image"
             class="max-w-full h-auto"
             height="200px"
-            />
+          />
         </div>
         <div class="flex-2 flex flex-col gap-2.5 w-full sm:w-[60%]">
           <mat-form-field class="example-full-width w-full">
@@ -35,30 +35,33 @@
           <mat-option>
             <ngx-mat-select-search
               [formControl]="productSearchCtrl"
+              [placeholderLabel]="'Search for a product...'"
+              [noEntriesFoundLabel]="'No matching products found.'"
             ></ngx-mat-select-search>
           </mat-option>
           @for (product of filteredProductsMulti | async; track product) {
-            <mat-option
-              [value]="Number(product.id)"
-              >
+            <mat-option [value]="Number(product.id)">
               {{ product.productName }} - {{ product.price | currency }}
             </mat-option>
           }
         </mat-select>
       </mat-form-field>
 
-      @for (selectedProductId of selectedProducts.value; track selectedProductId) {
-        <div
-          class="mt-4"
-          >
+      @for (
+        selectedProductId of selectedProducts.value;
+        track selectedProductId
+      ) {
+        <div class="mt-4">
           <h4>{{ getProductName(selectedProductId) }}</h4>
           <h6 class="m-0 pl-2.5 text-xs">Add-Ons</h6>
           @for (addOn of getAddOns(selectedProductId); track addOn) {
             <div class="pl-5">
               <mat-checkbox
                 [checked]="isAddOnChecked(selectedProductId, addOn.id)"
-                (change)="toggleAddOn(selectedProductId, addOn.id, $event.checked)"
-                >
+                (change)="
+                  toggleAddOn(selectedProductId, addOn.id, $event.checked)
+                "
+              >
                 {{ addOn.name }} (+{{ addOn.price | currency }})
               </mat-checkbox>
             </div>
@@ -75,7 +78,7 @@
       color="primary"
       mat-dialog-close
       (click)="onSave()"
-      >
+    >
       Save
     </button>
   </mat-dialog-actions>
