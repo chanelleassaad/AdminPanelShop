@@ -1,11 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
-import { DetailsManagementComponent } from './pages/details-management/details-management.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { UnauthGuard } from './guards/unauth.guard';
-import { CustomerDetailsComponent } from './components/customer-details/customer-details.component';
 
 const routes: Routes = [
   {
@@ -18,27 +14,40 @@ const routes: Routes = [
     children: [
       {
         path: 'login',
-        component: LoginComponent,
+        loadComponent: () =>
+          import('./pages/login/login.component').then((m) => m.LoginComponent),
         canActivate: [UnauthGuard],
       },
       {
         path: 'dashboard',
-        component: DashboardComponent,
+        loadComponent: () =>
+          import('./pages/dashboard/dashboard.component').then(
+            (m) => m.DashboardComponent,
+          ),
         canActivate: [AuthGuard],
       },
       {
         path: 'details-management',
-        component: DetailsManagementComponent,
+        loadComponent: () =>
+          import(
+            './pages/details-management/details-management.component'
+          ).then((m) => m.DetailsManagementComponent),
         canActivate: [AuthGuard],
       },
       {
         path: 'details-management/:label',
-        component: DetailsManagementComponent,
+        loadComponent: () =>
+          import(
+            './pages/details-management/details-management.component'
+          ).then((m) => m.DetailsManagementComponent),
         canActivate: [AuthGuard],
       },
       {
         path: 'details-management/customer-details/:id',
-        component: CustomerDetailsComponent,
+        loadComponent: () =>
+          import(
+            './components/customer-details/customer-details.component'
+          ).then((m) => m.CustomerDetailsComponent),
         canActivate: [AuthGuard],
       },
     ],
