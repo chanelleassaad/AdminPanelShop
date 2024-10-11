@@ -1,11 +1,37 @@
 import { Component, signal } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { MatCard, MatCardContent, MatCardActions } from '@angular/material/card';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { MatFormField, MatInput, MatError, MatSuffix } from '@angular/material/input';
+import { MatLabel } from '@angular/material/form-field';
+import { NgIf } from '@angular/common';
+import { MatIconButton, MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    standalone: true,
+    imports: [
+        MatCard,
+        MatTabGroup,
+        MatTab,
+        MatCardContent,
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormField,
+        MatLabel,
+        MatInput,
+        NgIf,
+        MatError,
+        MatIconButton,
+        MatSuffix,
+        MatIcon,
+        MatCardActions,
+        MatButton,
+    ],
 })
 export class LoginComponent {
   loginForm: FormGroup;

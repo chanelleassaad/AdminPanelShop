@@ -6,10 +6,27 @@ import { IAddress, IOrder } from '../../interfaces';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { take } from 'rxjs';
+import { MatIconButton, MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { CustomerCredentialsComponent } from '../customer-input/customer-credentials/customer-credentials.component';
+import { CustomerAddressesComponent } from '../customer-input/customer-addresses/customer-addresses.component';
+import { CustomerOrdersComponent } from '../customer-input/customer-orders/customer-orders.component';
 
 @Component({
-  selector: 'app-customer-details',
-  templateUrl: './customer-details.component.html',
+    selector: 'app-customer-details',
+    templateUrl: './customer-details.component.html',
+    standalone: true,
+    imports: [
+        MatIconButton,
+        MatIcon,
+        MatButton,
+        MatTabGroup,
+        MatTab,
+        CustomerCredentialsComponent,
+        CustomerAddressesComponent,
+        CustomerOrdersComponent,
+    ],
 })
 export class CustomerDetailsComponent {
   customerForm!: FormGroup;

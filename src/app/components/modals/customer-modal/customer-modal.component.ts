@@ -1,14 +1,28 @@
 import { Component, inject, signal } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialogTitle, MatDialogContent, MatDialogActions } from '@angular/material/dialog';
 import { ContentTableComponent } from '../../content-table/content-table.component';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../../../services/data.service';
 import { passwordValidator } from '../../../../validators/password-validator';
 import { take } from 'rxjs';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { CustomerCredentialsComponent } from '../../customer-input/customer-credentials/customer-credentials.component';
+import { CustomerAddressesComponent } from '../../customer-input/customer-addresses/customer-addresses.component';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-  selector: 'app-customer-modal',
-  templateUrl: './customer-modal.component.html',
+    selector: 'app-customer-modal',
+    templateUrl: './customer-modal.component.html',
+    standalone: true,
+    imports: [
+        MatDialogTitle,
+        CdkScrollable,
+        MatDialogContent,
+        CustomerCredentialsComponent,
+        CustomerAddressesComponent,
+        MatDialogActions,
+        MatButton,
+    ],
 })
 export class CustomerModalComponent {
   dialogRef = inject(MatDialogRef<ContentTableComponent>);

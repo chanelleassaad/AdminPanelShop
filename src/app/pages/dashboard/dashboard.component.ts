@@ -1,10 +1,24 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { map, tap } from 'rxjs/operators';
+import { MatGridList, MatGridTile } from '@angular/material/grid-list';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { MatIcon } from '@angular/material/icon';
+import { NgFor, NgIf, CurrencyPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    standalone: true,
+    imports: [
+        MatGridList,
+        MatGridTile,
+        CanvasJSAngularChartsModule,
+        MatIcon,
+        NgFor,
+        NgIf,
+        CurrencyPipe,
+    ],
 })
 export class DashboardComponent implements OnInit {
   productChartOptions: any;

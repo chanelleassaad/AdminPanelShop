@@ -5,13 +5,41 @@ import { map } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomerModalComponent } from '../modals/customer-modal/customer-modal.component';
 import { ShopModalComponent } from '../modals/shop-modal/shop-modal.component';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
+import { NgIf, NgFor, TitleCasePipe } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
+import { MatSort } from '@angular/material/sort';
+import { MatInput } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { MatIconButton } from '@angular/material/button';
 
 @Component({
-  selector: 'app-content-table',
-  templateUrl: './content-table.component.html',
+    selector: 'app-content-table',
+    templateUrl: './content-table.component.html',
+    standalone: true,
+    imports: [
+        NgIf,
+        MatIcon,
+        MatTable,
+        MatSort,
+        NgFor,
+        MatColumnDef,
+        MatHeaderCellDef,
+        MatHeaderCell,
+        MatCellDef,
+        MatCell,
+        MatInput,
+        FormsModule,
+        MatIconButton,
+        MatHeaderRowDef,
+        MatHeaderRow,
+        MatRowDef,
+        MatRow,
+        MatPaginator,
+        TitleCasePipe,
+    ],
 })
 export class ContentTableComponent implements OnInit {
   @Input() label = ''; // 'Customers', 'Shops', 'Orders'

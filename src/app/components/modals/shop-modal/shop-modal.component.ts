@@ -1,14 +1,45 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormArray, FormBuilder, FormGroup, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
 import { ContentTableComponent } from '../../content-table/content-table.component';
 import { DataService } from '../../../services/data.service';
 import { IAddOn, IProduct, IShop } from '../../../interfaces';
 import { ReplaySubject, Subject, takeUntil } from 'rxjs';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { MatFormField, MatInput } from '@angular/material/input';
+import { MatLabel } from '@angular/material/form-field';
+import { MatSelect, MatOption } from '@angular/material/select';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { NgFor, AsyncPipe, CurrencyPipe } from '@angular/common';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-  selector: 'app-shop-modal',
-  templateUrl: './shop-modal.component.html',
+    selector: 'app-shop-modal',
+    templateUrl: './shop-modal.component.html',
+    standalone: true,
+    imports: [
+        MatDialogTitle,
+        CdkScrollable,
+        MatDialogContent,
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormField,
+        MatLabel,
+        MatInput,
+        MatSelect,
+        MatOption,
+        MatSlideToggle,
+        NgxMatSelectSearchModule,
+        NgFor,
+        MatCheckbox,
+        MatDialogActions,
+        MatButton,
+        MatDialogClose,
+        AsyncPipe,
+        CurrencyPipe,
+    ],
 })
 export class ShopModalComponent implements OnInit, OnDestroy {
   shopForm: FormGroup;
