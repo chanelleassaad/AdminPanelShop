@@ -1,6 +1,20 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+  MatDialogTitle,
+  MatDialogContent,
+  MatDialogActions,
+  MatDialogClose,
+} from '@angular/material/dialog';
 import { ContentTableComponent } from '../../content-table/content-table.component';
 import { DataService } from '../../../services/data.service';
 import { IAddOn, IProduct, IShop } from '../../../interfaces';
@@ -16,10 +30,10 @@ import { MatCheckbox } from '@angular/material/checkbox';
 import { MatButton } from '@angular/material/button';
 
 @Component({
-    selector: 'app-shop-modal',
-    templateUrl: './shop-modal.component.html',
-    standalone: true,
-    imports: [
+  selector: 'app-shop-modal',
+  templateUrl: './shop-modal.component.html',
+  standalone: true,
+  imports: [
     MatDialogTitle,
     CdkScrollable,
     MatDialogContent,
@@ -37,8 +51,8 @@ import { MatButton } from '@angular/material/button';
     MatButton,
     MatDialogClose,
     AsyncPipe,
-    CurrencyPipe
-],
+    CurrencyPipe,
+  ],
 })
 export class ShopModalComponent implements OnInit, OnDestroy {
   private fb = inject(FormBuilder);
@@ -108,6 +122,7 @@ export class ShopModalComponent implements OnInit, OnDestroy {
     );
 
     selectedProductIds.forEach((productId) => {
+      // Check if productId already exists in the form array
       if (!existingProductIds.has(productId)) {
         const product = this.products.find((p) => Number(p.id) === productId);
         if (product) {
@@ -117,13 +132,6 @@ export class ShopModalComponent implements OnInit, OnDestroy {
           });
           productsArray.push(productAddOns);
         }
-      }
-    });
-
-    productsArray.controls.forEach((control, index) => {
-      const productId = control.get('productId')?.value;
-      if (!selectedProductIds.includes(productId)) {
-        productsArray.removeAt(index);
       }
     });
   }
