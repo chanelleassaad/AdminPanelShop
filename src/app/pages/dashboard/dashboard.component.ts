@@ -4,21 +4,19 @@ import { map, tap } from 'rxjs/operators';
 import { MatGridList, MatGridTile } from '@angular/material/grid-list';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { MatIcon } from '@angular/material/icon';
-import { NgFor, NgIf, CurrencyPipe } from '@angular/common';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-dashboard',
-    templateUrl: './dashboard.component.html',
-    standalone: true,
-    imports: [
-        MatGridList,
-        MatGridTile,
-        CanvasJSAngularChartsModule,
-        MatIcon,
-        NgFor,
-        NgIf,
-        CurrencyPipe,
-    ],
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  standalone: true,
+  imports: [
+    MatGridList,
+    MatGridTile,
+    CanvasJSAngularChartsModule,
+    MatIcon,
+    CurrencyPipe,
+  ],
 })
 export class DashboardComponent implements OnInit {
   productChartOptions: any;
@@ -33,11 +31,11 @@ export class DashboardComponent implements OnInit {
   isSmallScreen = false;
   @HostListener('window:resize', ['$event'])
   ngOnInit(): void {
-    this.onResize(null);
+    this.onResize();
     this.loadData();
   }
 
-  onResize(event: any) {
+  onResize() {
     this.isSmallScreen = window.innerWidth < 768;
   }
 

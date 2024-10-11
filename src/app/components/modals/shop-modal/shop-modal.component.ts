@@ -11,7 +11,7 @@ import { MatLabel } from '@angular/material/form-field';
 import { MatSelect, MatOption } from '@angular/material/select';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
-import { NgFor, AsyncPipe, CurrencyPipe } from '@angular/common';
+import { AsyncPipe, CurrencyPipe } from '@angular/common';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatButton } from '@angular/material/button';
 
@@ -20,26 +20,25 @@ import { MatButton } from '@angular/material/button';
     templateUrl: './shop-modal.component.html',
     standalone: true,
     imports: [
-        MatDialogTitle,
-        CdkScrollable,
-        MatDialogContent,
-        FormsModule,
-        ReactiveFormsModule,
-        MatFormField,
-        MatLabel,
-        MatInput,
-        MatSelect,
-        MatOption,
-        MatSlideToggle,
-        NgxMatSelectSearchModule,
-        NgFor,
-        MatCheckbox,
-        MatDialogActions,
-        MatButton,
-        MatDialogClose,
-        AsyncPipe,
-        CurrencyPipe,
-    ],
+    MatDialogTitle,
+    CdkScrollable,
+    MatDialogContent,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatSelect,
+    MatOption,
+    MatSlideToggle,
+    NgxMatSelectSearchModule,
+    MatCheckbox,
+    MatDialogActions,
+    MatButton,
+    MatDialogClose,
+    AsyncPipe,
+    CurrencyPipe
+],
 })
 export class ShopModalComponent implements OnInit, OnDestroy {
   shopForm: FormGroup;

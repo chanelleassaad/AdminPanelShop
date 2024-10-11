@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgFor, NgIf } from '@angular/common';
+
 import { MatIconButton, MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatFormField, MatInput } from '@angular/material/input';
@@ -11,17 +11,15 @@ import { MatLabel } from '@angular/material/form-field';
     templateUrl: './customer-addresses.component.html',
     standalone: true,
     imports: [
-        FormsModule,
-        ReactiveFormsModule,
-        NgFor,
-        NgIf,
-        MatIconButton,
-        MatIcon,
-        MatFormField,
-        MatLabel,
-        MatInput,
-        MatButton,
-    ],
+    FormsModule,
+    ReactiveFormsModule,
+    MatIconButton,
+    MatIcon,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatButton
+],
 })
 export class CustomerAddressesComponent {
   @Input() customerForm!: FormGroup;

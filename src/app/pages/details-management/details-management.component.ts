@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { MatTabGroup, MatTab } from '@angular/material/tabs';
-import { NgFor } from '@angular/common';
+
 import { ContentTableComponent } from '../../components/content-table/content-table.component';
 
 @Component({
@@ -10,11 +10,10 @@ import { ContentTableComponent } from '../../components/content-table/content-ta
     templateUrl: './details-management.component.html',
     standalone: true,
     imports: [
-        MatTabGroup,
-        NgFor,
-        MatTab,
-        ContentTableComponent,
-    ],
+    MatTabGroup,
+    MatTab,
+    ContentTableComponent
+],
 })
 export class DetailsManagementComponent implements OnInit {
   labels = ['Customers', 'Shops', 'Orders'];

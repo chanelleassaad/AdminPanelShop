@@ -8,7 +8,7 @@ import { ShopModalComponent } from '../modals/shop-modal/shop-modal.component';
 import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
-import { NgIf, NgFor, TitleCasePipe } from '@angular/common';
+import { TitleCasePipe } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { MatSort } from '@angular/material/sort';
 import { MatInput } from '@angular/material/input';
@@ -20,26 +20,24 @@ import { MatIconButton } from '@angular/material/button';
     templateUrl: './content-table.component.html',
     standalone: true,
     imports: [
-        NgIf,
-        MatIcon,
-        MatTable,
-        MatSort,
-        NgFor,
-        MatColumnDef,
-        MatHeaderCellDef,
-        MatHeaderCell,
-        MatCellDef,
-        MatCell,
-        MatInput,
-        FormsModule,
-        MatIconButton,
-        MatHeaderRowDef,
-        MatHeaderRow,
-        MatRowDef,
-        MatRow,
-        MatPaginator,
-        TitleCasePipe,
-    ],
+    MatIcon,
+    MatTable,
+    MatSort,
+    MatColumnDef,
+    MatHeaderCellDef,
+    MatHeaderCell,
+    MatCellDef,
+    MatCell,
+    MatInput,
+    FormsModule,
+    MatIconButton,
+    MatHeaderRowDef,
+    MatHeaderRow,
+    MatRowDef,
+    MatRow,
+    MatPaginator,
+    TitleCasePipe
+],
 })
 export class ContentTableComponent implements OnInit {
   @Input() label = ''; // 'Customers', 'Shops', 'Orders'

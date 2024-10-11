@@ -1,43 +1,38 @@
 <mat-toolbar
   class="fixed top-0 w-full z-50 !h-[56px] !bg-dark-purple !text-white"
 >
-  <button
-    mat-icon-button
-    *ngIf="localStorage.getItem('currentUser')"
-    (click)="drawer.toggle()"
-  >
-    <mat-icon>menu</mat-icon>
-  </button>
+  @if (localStorage.getItem("currentUser")) {
+    <button mat-icon-button (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  }
   <p class="font-serif">C's Candy Shop - Admin Panel</p>
   <span class="flex-1 basis-auto"></span>
-  <button
-    mat-icon-button
-    *ngIf="localStorage.getItem('currentUser')"
-    (click)="signOut()"
-  >
-    <mat-icon>logout</mat-icon>
-  </button>
+  @if (localStorage.getItem("currentUser")) {
+    <button mat-icon-button (click)="signOut()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  }
 </mat-toolbar>
 
 <!-- Side Navigation -->
 <mat-sidenav-container class="mt-[56px] h-[calc(100vh-56px)]">
   <mat-sidenav #drawer mode="over" opened="false" class="w-[230px] p-[10px]">
     <mat-nav-list>
-      <mat-list-item
-        *ngFor="let item of menuItems"
-        (click)="navigateTo(item.route, drawer)"
-      >
-        <div
-          class="flex items-center text-dark-purple"
-          [ngClass]="{
-            'pl-5 medium-purple': item.indent,
-            'pl-0 ': !item.indent,
-          }"
-        >
-          <mat-icon matListIcon class="pr-1">{{ item.icon }}</mat-icon>
-          {{ item.label }}
-        </div>
-      </mat-list-item>
+      @for (item of menuItems; track item) {
+        <mat-list-item (click)="navigateTo(item.route, drawer)">
+          <div
+            class="flex items-center text-dark-purple"
+            [ngClass]="{
+              'pl-5 medium-purple': item.indent,
+              'pl-0 ': !item.indent,
+            }"
+          >
+            <mat-icon matListIcon class="pr-1">{{ item.icon }}</mat-icon>
+            {{ item.label }}
+          </div>
+        </mat-list-item>
+      }
     </mat-nav-list>
   </mat-sidenav>
 

@@ -19,71 +19,73 @@
       <div class="flex flex-col w-full h-full bg-white">
         <h1
           class="text-[17px] font-bold text-dark-purple self-center pt-0.5 px-0.5"
-        >
+          >
           Total Number of Customers
         </h1>
         <div class="flex items-center h-full">
           <div
             class="!flex !items-center !justify-center bg-medium-purple text-white rounded-full !mx-auto shadow-md w-24 h-24 lg:w-48 lg:h-48"
-          >
+            >
             <mat-icon
               class="md:text-5xl md:!w-[50%] md:!h-[50%] lg:!w-[30%] lg:!h-[25%]"
               >people</mat-icon
-            >
-            <span class="font-bold md:text-5xl lg:text-6xl">{{
-              numberOfCustomers
-            }}</span>
+              >
+              <span class="font-bold md:text-5xl lg:text-6xl">{{
+                numberOfCustomers
+              }}</span>
+            </div>
           </div>
         </div>
-      </div>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="isSmallScreen ? 2 : 3">
-      <canvasjs-chart
-        [options]="revenueChartOptions"
-        [styles]="{ height: '100%' }"
-        class="w-full h-full"
-      ></canvasjs-chart>
-    </mat-grid-tile>
-  </mat-grid-list>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="isSmallScreen ? 2 : 3">
+        <canvasjs-chart
+          [options]="revenueChartOptions"
+          [styles]="{ height: '100%' }"
+          class="w-full h-full"
+        ></canvasjs-chart>
+      </mat-grid-tile>
+    </mat-grid-list>
 
-  <!-- Products Section -->
-  <div class="mt-5 pb-5 w-full">
-    <h3 class="text-lg p-2.5 font-bold">All Products</h3>
-    <div class="flex flex-wrap gap-5 justify-center">
-      <div
-        class="border border-gray-300 rounded-lg p-2 sm:w-[40%] md:w-[30%] lg:w-[15%] shadow-md bg-white"
-        *ngFor="let product of products"
-      >
-        <div class="flex justify-center">
-          <img
-            [src]="product.image"
-            alt="{{ product.name }}"
-            class="w-auto h-[100px] object-cover rounded-md"
-          />
-        </div>
-
-        <h3 class="text-base my-1">{{ product.productName }}</h3>
-        <div class="flex items-center">
-          <p class="text-sm text-gray-800 pr-2">
-            Price: {{ product.price | currency }}
-          </p>
-          <p class="text-xs text-gray-600">
-            {{ product.available ? "Available" : "Out of Stock" }}
-          </p>
-        </div>
-
-        <div
-          class="product-addons"
-          *ngIf="product.addOns && product.addOns.length"
-        >
-          <h5 class="p-0 m-0">Add-ons:</h5>
-          <ul class="list-none p-0">
-            <li class="text-xs my-1" *ngFor="let addon of product.addOns">
-              {{ addon.name }} - {{ addon.price | currency }}
-            </li>
-          </ul>
-        </div>
+    <!-- Products Section -->
+    <div class="mt-5 pb-5 w-full">
+      <h3 class="text-lg p-2.5 font-bold">All Products</h3>
+      <div class="flex flex-wrap gap-5 justify-center">
+        @for (product of products; track product) {
+          <div
+            class="border border-gray-300 rounded-lg p-2 sm:w-[40%] md:w-[30%] lg:w-[15%] shadow-md bg-white"
+            >
+            <div class="flex justify-center">
+              <img
+                [src]="product.image"
+                alt="{{ product.name }}"
+                class="w-auto h-[100px] object-cover rounded-md"
+                />
+            </div>
+            <h3 class="text-base my-1">{{ product.productName }}</h3>
+            <div class="flex items-center">
+              <p class="text-sm text-gray-800 pr-2">
+                Price: {{ product.price | currency }}
+              </p>
+              <p class="text-xs text-gray-600">
+                {{ product.available ? "Available" : "Out of Stock" }}
+              </p>
+            </div>
+            @if (product.addOns && product.addOns.length) {
+              <div
+                class="product-addons"
+                >
+                <h5 class="p-0 m-0">Add-ons:</h5>
+                <ul class="list-none p-0">
+                  @for (addon of product.addOns; track addon) {
+                    <li class="text-xs my-1">
+                      {{ addon.name }} - {{ addon.price | currency }}
+                    </li>
+                  }
+                </ul>
+              </div>
+            }
+          </div>
+        }
       </div>
     </div>
   </div>
-</div>

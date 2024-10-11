@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { MatDrawer, MatSidenavContainer, MatSidenav, MatSidenavContent } from '@angular/material/sidenav';
 import { MatToolbar } from '@angular/material/toolbar';
-import { NgIf, NgFor, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatNavList, MatListItem } from '@angular/material/list';
@@ -12,19 +12,17 @@ import { MatNavList, MatListItem } from '@angular/material/list';
     templateUrl: './app.component.html',
     standalone: true,
     imports: [
-        MatToolbar,
-        NgIf,
-        MatIconButton,
-        MatIcon,
-        MatSidenavContainer,
-        MatSidenav,
-        MatNavList,
-        NgFor,
-        MatListItem,
-        NgClass,
-        MatSidenavContent,
-        RouterOutlet,
-    ],
+    MatToolbar,
+    MatIconButton,
+    MatIcon,
+    MatSidenavContainer,
+    MatSidenav,
+    MatNavList,
+    MatListItem,
+    NgClass,
+    MatSidenavContent,
+    RouterOutlet
+],
 })
 export class AppComponent {
   title = 'azsft';
