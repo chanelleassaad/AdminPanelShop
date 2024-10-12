@@ -63,7 +63,9 @@
               class="w-auto h-[100px] object-cover rounded-md"
             />
           </div>
-          <h3 class="text-base my-1">{{ product.productName }}</h3>
+          <h3 class="my-1 font-bold text-lg !pb-0">
+            {{ product.productName }}
+          </h3>
           <div class="flex items-center">
             <p class="text-sm text-gray-800 pr-2">
               Price: {{ product.price | currency }}
@@ -74,7 +76,7 @@
           </div>
           @if (product.addOns && product.addOns.length) {
             <div class="product-addons">
-              <h5 class="p-0 m-0">Add-ons:</h5>
+              <h3 class="pt-1 m-0 text-sm font-bold">Add-ons:</h3>
               <ul class="list-none p-0">
                 @for (addon of product.addOns; track addon) {
                   <li class="text-xs my-1">
